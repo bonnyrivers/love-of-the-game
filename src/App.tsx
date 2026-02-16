@@ -1,12 +1,21 @@
-import "./App.css";
-import ProjectsPage from "./ProjectsPage";
+import PropsComponent from "./components/PropsComponent";
+import UserComponent from "./components/UserComponent";
+import UserList from "./components/UserList";
 
-function App() {
+const App = () => {
   return (
-    <div className="container">
-      <ProjectsPage />
+    <div>
+      <h1>Users</h1>
+      <UserList />
+      <PropsComponent firstName="John" lastName="Bob" age={33} />
+      <UserComponent
+        name="John Doe"
+        age={26}
+        address="87 Summer St, Boston, MA 02110"
+        dob={new Date()}
+      />
     </div>
   );
-}
+};
 
 export default App;
