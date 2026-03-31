@@ -72,7 +72,7 @@ export default function App() {
       case "ob-avail":
         return <ObAvail go={go} state={user} set={set} />;
       case "home":
-        return <Home go={go} state={{name: "Bonny"}} />;
+        return <Home go={go} state={user} />;
       case "matches":
         return <Matches go={go} />;
       case "notes":
@@ -90,7 +90,7 @@ export default function App() {
       case "copy-editor":
         return <CopyEditor go={go} />;
       default:
-        return <Home go={go} state={{name: "Bonny"}} />;
+        return <Splash go={go} />;
     }
   };
 
