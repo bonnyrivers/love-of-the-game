@@ -19,7 +19,7 @@ import G from "./styles.jsx";
 const MAIN = ["home", "matches", "notes", "profile"];
 
 export default function App() {
-  const [screen, setScreen] = useState("home");
+  const [screen, setScreen] = useState("splash");
   const [user, setUser] = useState({});
   const go = (s) => setScreen(s);
   const set = (d) => setUser((p) => ({ ...p, ...d }));
