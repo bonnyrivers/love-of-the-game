@@ -3,12 +3,7 @@
 // ══════════════════════════════════════════════════════════════════════════════
 import { useState } from "react";
 import Splash from "./components/Splash.jsx";
-import ObName from "./components/onboarding/ObName.jsx";
-import ObIdentity from "./components/onboarding/ObIdentity.jsx";
-import ObQuiz from "./components/onboarding/ObQuiz.jsx";
-import ObLifestyle from "./components/onboarding/ObLifestyle.jsx";
-import ObPhoto from "./components/onboarding/ObPhoto.jsx";
-import ObAvail from "./components/onboarding/ObAvail.jsx";
+import { ObName, ObIdentity, ObQuiz, ObLifestyle, ObPhoto, ObAvail } from "./components/Onboarding/index.js";
 import Home from "./components/Home.jsx";
 import Matches from "./components/Matches.jsx";
 import Notes from "./components/Notes.jsx";
@@ -18,7 +13,7 @@ import PostDate from "./components/PostDate.jsx";
 import Lockout from "./components/Lockout.jsx";
 import DeepQuiz from "./components/DeepQuiz.jsx";
 import Nav from "./components/Nav.jsx";
-import G from "./styles";
+import G from "./styles.jsx";
 
 const MAIN = ["home", "matches", "notes", "profile"];
 
