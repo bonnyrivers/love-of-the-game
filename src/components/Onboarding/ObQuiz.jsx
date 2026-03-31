@@ -1,5 +1,6 @@
 import React from 'react';
 import { Screen, Mono, Btn } from "../UI";
+import copy from '../../copy.js';
 
 // ══════════════════════════════════════════════════════════════════════════════
 // 4. QUICK QUIZ — reworked 5 questions
@@ -7,43 +8,43 @@ import { Screen, Mono, Btn } from "../UI";
 export const QS = [
   // Q1 — OPENER: how you spend time (moved from Q3)
   {
-    id:"time", label:"How you spend your time",
-    q:"How do you actually spend your free time?",
-    hint:"The real version, not the aspirational one.",
-    opts:["Moving — walks, hikes, runs, the gym","Good food and good company","Art, music, making things","Quiet nights — books, films, cooking","Spontaneous plans, always moving","Travel whenever I can"],
+    id:"time", label:copy.components.onboarding.obQuiz.q1.label,
+    q:copy.components.onboarding.obQuiz.q1.question,
+    hint:copy.components.onboarding.obQuiz.q1.hint,
+    opts:copy.components.onboarding.obQuiz.q1.options,
     multi:true
   },
   // Q2 — INTENT: rewritten options
   {
-    id:"intent", label:"What you're looking for",
-    q:"What are you open to right now?",
-    hint:"Be straight with yourself.",
-    opts:["I want a real relationship","Seriously dating — putting in real time","Open to wherever it goes","Just getting back out there"],
+    id:"intent", label:copy.components.onboarding.obQuiz.q2.label,
+    q:copy.components.onboarding.obQuiz.q2.question,
+    hint:copy.components.onboarding.obQuiz.q2.hint,
+    opts:copy.components.onboarding.obQuiz.q2.options,
     multi:false
   },
   // Q3 — WHAT MATTERS: re-bucketed
   {
-    id:"values", label:"What matters in a partner",
-    q:"In a partner, what actually matters to you?",
-    hint:"Pick everything that genuinely lands.",
-    opts:["Emotional availability","Making me laugh","Shared adventures and travel","Physical warmth and affection","Real intellectual depth","Ambition that matches mine","Space and trust without question","Lightness — someone who doesn't take life too seriously"],
+    id:"values", label:copy.components.onboarding.obQuiz.q3.label,
+    q:copy.components.onboarding.obQuiz.q3.question,
+    hint:copy.components.onboarding.obQuiz.q3.hint,
+    opts:copy.components.onboarding.obQuiz.q3.options,
     multi:true
   },
   // Q4 — LIGHTER conflict replacement: date energy
   {
-    id:"dates", label:"Your date style",
-    q:"What kind of dates do you actually want to go on?",
-    hint:"Pick all that sound like a good time.",
-    opts:["Coffee, walk, see where it goes","Dinner somewhere worth going to","Active — a hike, a game, something physical","A cultural thing — museum, show, market","Drinks and good conversation","Something off the bucket list"],
+    id:"dates", label:copy.components.onboarding.obQuiz.q4.label,
+    q:copy.components.onboarding.obQuiz.q4.question,
+    hint:copy.components.onboarding.obQuiz.q4.hint,
+    opts:copy.components.onboarding.obQuiz.q4.options,
     multi:true
   },
   // Q5 — LOVE LANGUAGES: give and receive
   {
-    id:"love", label:"How you give and receive love",
-    q:"How do you best give love — and how do you most need to receive it?",
-    hint:"You can pick one for each or the same.",
+    id:"love", label:copy.components.onboarding.obQuiz.q5.label,
+    q:copy.components.onboarding.obQuiz.q5.question,
+    hint:copy.components.onboarding.obQuiz.q5.hint,
     type:"double",
-    opts:["Words that land precisely","Quality time, fully present","Physical touch and closeness","Acts of care, big and small","Showing up — just being there"],
+    opts:copy.components.onboarding.obQuiz.q5.options,
   },
 ];
 
@@ -97,7 +98,7 @@ class ObQuiz extends React.Component {
         </div>
         <div className="fu d1" style={{ paddingTop:12,marginBottom:8,display:"flex",justifyContent:"space-between",alignItems:"center" }}>
           <Mono>{step+1} of {QS.length} — {q.label}</Mono>
-          {step>0&&<button onClick={()=>this.setStep(step-1)} style={{ background:"none",border:"none",cursor:"pointer",fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em" }}>← back</button>}
+          {step>0&&<button onClick={()=>this.setStep(step-1)} style={{ background:"none",border:"none",cursor:"pointer",fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em" }}>{copy.components.onboarding.obQuiz.back}</button>}
         </div>
         <div className="fu d2" style={{ margin:"24px 0 24px" }}>
           <h2 style={{ fontFamily:"var(--serif)",fontSize:26,fontWeight:400,fontStyle:"italic",color:"var(--white)",lineHeight:1.25,marginBottom:7 }}>{q.q}</h2>
@@ -107,7 +108,7 @@ class ObQuiz extends React.Component {
         {/* Double question — love languages */}
         {q.type==="double" ? (
           <div className="fu d3" style={{ flex:1 }}>
-            <Mono style={{ display:"block",marginBottom:12 }}>How I give love</Mono>
+            <Mono style={{ display:"block",marginBottom:12 }}>{copy.components.onboarding.obQuiz.q5.giveLabel}</Mono>
             <div style={{ display:"flex",flexDirection:"column",gap:8,marginBottom:24 }}>
               {q.opts.map(o=>(
                 <button key={`g-${o}`} onClick={()=>this.setGive(o)} style={{
@@ -119,7 +120,7 @@ class ObQuiz extends React.Component {
                 }}>{o}</button>
               ))}
             </div>
-            <Mono style={{ display:"block",marginBottom:12 }}>How I need to receive it</Mono>
+            <Mono style={{ display:"block",marginBottom:12 }}>{copy.components.onboarding.obQuiz.q5.receiveLabel}</Mono>
             <div style={{ display:"flex",flexDirection:"column",gap:8 }}>
               {q.opts.map(o=>(
                 <button key={`r-${o}`} onClick={()=>this.setReceive(o)} style={{
@@ -154,8 +155,8 @@ class ObQuiz extends React.Component {
             if(q.type==="double") this.props.set({ loveGive:give, loveReceive:receive });
             this.props.set({quickAnswers:answers});
             step<QS.length-1 ? this.setStep(step+1) : this.props.go("ob-lifestyle");
-          }}>{step<QS.length-1?"Next →":"Continue →"}</Btn>
-          {q.multi&&<p style={{ fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",textAlign:"center",marginTop:10,letterSpacing:"0.1em" }}>SELECT ALL THAT APPLY</p>}
+          }}>{step<QS.length-1?copy.components.onboarding.obQuiz.next:copy.components.onboarding.obQuiz.continue}</Btn>
+          {q.multi&&<p style={{ fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",textAlign:"center",marginTop:10,letterSpacing:"0.1em" }}>{copy.components.onboarding.obQuiz.selectAll}</p>}
         </div>
       </Screen>
     );

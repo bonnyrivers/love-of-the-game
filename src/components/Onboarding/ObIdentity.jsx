@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { Mono, Screen, Chip, Btn } from "../UI";
+import copy from '../../copy.js';
 
 // ══════════════════════════════════════════════════════════════════════════════
 class ObIdentity extends React.Component {
@@ -27,36 +28,35 @@ class ObIdentity extends React.Component {
 
   render() {
     const { gender, seeking, sign } = this.state;
-    const signs = ["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
     return (
       <Screen>
         <div className="fu d1" style={{ marginBottom:32 }}>
-          <Mono>2 — 6</Mono>
-          <h2 style={{ fontFamily:"var(--serif)",fontSize:34,fontStyle:"italic",fontWeight:400,color:"var(--white)",margin:"14px 0" }}>Who you are.</h2>
+          <Mono>{copy.components.onboarding.obIdentity.step}</Mono>
+          <h2 style={{ fontFamily:"var(--serif)",fontSize:34,fontStyle:"italic",fontWeight:400,color:"var(--white)",margin:"14px 0" }}>{copy.components.onboarding.obIdentity.title}</h2>
         </div>
         <div style={{ display:"flex",flexDirection:"column",gap:28,flex:1 }}>
           <div className="fu d2">
-            <Mono style={{ display:"block",marginBottom:12 }}>I am a</Mono>
+            <Mono style={{ display:"block",marginBottom:12 }}>{copy.components.onboarding.obIdentity.iAmA}</Mono>
             <div style={{ display:"flex",flexWrap:"wrap",gap:8 }}>
-              {["Man","Woman","Non-binary","Other"].map(g=><Chip key={g} label={g} active={gender===g} onClick={()=>this.setGender(g)}/>)}
+              {copy.components.onboarding.obIdentity.genders.map(g=><Chip key={g} label={g} active={gender===g} onClick={()=>this.setGender(g)}/>)}
             </div>
           </div>
           <div className="fu d3">
-            <Mono style={{ display:"block",marginBottom:12 }}>Open to</Mono>
+            <Mono style={{ display:"block",marginBottom:12 }}>{copy.components.onboarding.obIdentity.openTo}</Mono>
             <div style={{ display:"flex",flexWrap:"wrap",gap:8 }}>
-              {["Men","Women","Everyone"].map(s=><Chip key={s} label={s} active={seeking.includes(s)} onClick={()=>this.toggleSeeking(s)}/>)}
+              {copy.components.onboarding.obIdentity.seeking.map(s=><Chip key={s} label={s} active={seeking.includes(s)} onClick={()=>this.toggleSeeking(s)}/>)}
             </div>
           </div>
           <div className="fu d4">
-            <Mono style={{ display:"block",marginBottom:4 }}>Sun sign</Mono>
-            <p style={{ fontFamily:"var(--serif)",fontSize:12,fontStyle:"italic",color:"var(--dim)",marginBottom:12 }}>Optional — feeds into compatibility layer</p>
+            <Mono style={{ display:"block",marginBottom:4 }}>{copy.components.onboarding.obIdentity.sunSign}</Mono>
+            <p style={{ fontFamily:"var(--serif)",fontSize:12,fontStyle:"italic",color:"var(--dim)",marginBottom:12 }}>{copy.components.onboarding.obIdentity.sunSignHint}</p>
             <div style={{ display:"flex",flexWrap:"wrap",gap:7 }}>
-              {signs.map(s=><Chip key={s} label={s} active={sign===s} onClick={()=>this.setSign(s)}/>)}
+              {copy.components.onboarding.obIdentity.zodiacSigns.map(s=><Chip key={s} label={s} active={sign===s} onClick={()=>this.setSign(s)}/>)}
             </div>
           </div>
         </div>
         <div className="fu d5" style={{ marginTop:28 }}>
-          <Btn onClick={()=>{ this.props.set({gender,seeking,sign}); this.props.go("ob-quiz"); }} disabled={!gender||!seeking.length}>Continue →</Btn>
+          <Btn onClick={()=>{ this.props.set({gender,seeking,sign}); this.props.go("ob-quiz"); }} disabled={!gender||!seeking.length}>{copy.components.onboarding.obIdentity.continue}</Btn>
         </div>
       </Screen>
     );

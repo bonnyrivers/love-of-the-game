@@ -1,5 +1,6 @@
 import React from 'react';
 import { Screen, Mono, Btn } from "../UI";
+import copy from '../../copy.js';
 // ══════════════════════════════════════════════════════════════════════════════
 // AVAILABILITY GRID
 // ══════════════════════════════════════════════════════════════════════════════
@@ -29,10 +30,10 @@ class ObAvail extends React.Component {
     return (
       <Screen>
         <div className="fu d1" style={{ marginBottom:22 }}>
-          <Mono>6 — 6</Mono>
-          <h2 style={{ fontFamily:"var(--serif)",fontSize:34,fontStyle:"italic",fontWeight:400,color:"var(--white)",margin:"14px 0 6px",lineHeight:1.1 }}>When you can show up.</h2>
+          <Mono>{copy.components.onboarding.obAvail.step}</Mono>
+          <h2 style={{ fontFamily:"var(--serif)",fontSize:34,fontStyle:"italic",fontWeight:400,color:"var(--white)",margin:"14px 0 6px",lineHeight:1.1 }}>{copy.components.onboarding.obAvail.title}</h2>
           <p style={{ fontFamily:"var(--serif)",fontSize:14,color:"var(--mid)",fontStyle:"italic",lineHeight:1.6 }}>
-            Tap your open windows. ★ = high-value slots inferred from your schedule. Updated weekly.
+            {copy.components.onboarding.obAvail.subtitle}
           </p>
         </div>
         <div className="fu d2" style={{ overflowX:"auto",marginBottom:20 }}>
@@ -63,12 +64,11 @@ class ObAvail extends React.Component {
         </div>
         <div className="fu d3" style={{ borderLeft:"1px solid var(--line)",paddingLeft:12,marginBottom:24 }}>
           <p style={{ fontFamily:"var(--mono)",fontSize:8,letterSpacing:"0.08em",color:"var(--mid)",lineHeight:1.9 }}>
-            No-show on a confirmed date = 7-day lockout.<br/>
-            Emergency cancellations reviewed individually.
+            {copy.components.onboarding.obAvail.notes.map(note => <>{note}<br/></>)}
           </p>
         </div>
         <Btn onClick={()=>{ this.props.set({avail}); this.props.go("home"); }} disabled={count<3}>
-          {count<3?`Pick ${3-count} more slot${3-count===1?"":"s"}`:"You're all set →"}
+          {count<3?copy.components.onboarding.obAvail.pickMore.replace('{count}', 3-count).replace('{plural}', 3-count===1?'':'s') : copy.components.onboarding.obAvail.allSet}
         </Btn>
       </Screen>
     );

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Screen, Mono, Btn } from "./UI";
+import copy from '../copy.js';
 
 // ══════════════════════════════════════════════════════════════════════════════
 // 11. POST-DATE — simplified to 2 prompts + free write
 // ══════════════════════════════════════════════════════════════════════════════
-const VIBES = ["✦ Energized","◌ Calm","△ Curious","◎ Seen","▽ Flat","◈ Uncertain","○ Hopeful","◇ Guarded","◑ Amused","⊕ Full"];
+const VIBES = copy.components.postDate.step1.vibes;
 
 class PostDate extends React.Component {
   constructor(props) {
@@ -48,10 +49,10 @@ class PostDate extends React.Component {
       <Screen style={{ justifyContent:"center",textAlign:"center" }}>
         <div className="fu d1">
           <div style={{ fontSize:28,marginBottom:18,color:"var(--dim)" }}>◫</div>
-          <h2 style={{ fontFamily:"var(--serif)",fontSize:30,fontStyle:"italic",fontWeight:400,color:"var(--white)",marginBottom:10 }}>Filed.</h2>
-          <p style={{ fontFamily:"var(--serif)",fontSize:15,fontStyle:"italic",color:"var(--mid)",lineHeight:1.7,marginBottom:30 }}>Only you will ever read this.</p>
-          <Btn onClick={()=>go("notes")}>Open field notes →</Btn>
-          <Btn ghost style={{ marginTop:10 }} onClick={()=>go("home")}>Back to today</Btn>
+          <h2 style={{ fontFamily:"var(--serif)",fontSize:30,fontStyle:"italic",fontWeight:400,color:"var(--white)",marginBottom:10 }}>{copy.components.postDate.filed.title}</h2>
+          <p style={{ fontFamily:"var(--serif)",fontSize:15,fontStyle:"italic",color:"var(--mid)",lineHeight:1.7,marginBottom:30 }}>{copy.components.postDate.filed.message}</p>
+          <Btn onClick={()=>go("notes")}>{copy.components.postDate.filed.openNotes}</Btn>
+          <Btn ghost style={{ marginTop:10 }} onClick={()=>go("home")}>{copy.components.postDate.filed.backToday}</Btn>
         </div>
       </Screen>
     );
@@ -59,14 +60,14 @@ class PostDate extends React.Component {
     return (
       <Screen key={step}>
         <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:28 }}>
-          <Mono>{step+1} of 3 — Field notes</Mono>
-          <button onClick={()=>go("notes")} style={{ background:"none",border:"none",cursor:"pointer",fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em" }}>SKIP</button>
+          <Mono>{copy.components.postDate.header.replace('{step+1}', step+1)}</Mono>
+          <button onClick={()=>go("notes")} style={{ background:"none",border:"none",cursor:"pointer",fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em" }}>{copy.components.postDate.skip}</button>
         </div>
 
         {step===0&&(
           <div className="fu d1">
-            <h2 style={{ fontFamily:"var(--serif)",fontSize:28,fontStyle:"italic",fontWeight:400,color:"var(--white)",marginBottom:6,lineHeight:1.2 }}>How do you feel<br/>walking away?</h2>
-            <p style={{ fontFamily:"var(--serif)",fontSize:14,color:"var(--mid)",fontStyle:"italic",marginBottom:24 }}>About you. Not them.</p>
+            <h2 style={{ fontFamily:"var(--serif)",fontSize:28,fontStyle:"italic",fontWeight:400,color:"var(--white)",marginBottom:6,lineHeight:1.2 }}>{copy.components.postDate.step1.title}</h2>
+            <p style={{ fontFamily:"var(--serif)",fontSize:14,color:"var(--mid)",fontStyle:"italic",marginBottom:24 }}>{copy.components.postDate.step1.subtitle}</p>
             <div style={{ display:"flex",flexWrap:"wrap",gap:8,marginBottom:32 }}>
               {VIBES.map(v=>(
                 <button key={v} onClick={()=>this.setVibe(v)} style={{
@@ -78,31 +79,31 @@ class PostDate extends React.Component {
                 }}>{v}</button>
               ))}
             </div>
-            <p style={{ fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em",marginBottom:16 }}>CHOOSE AS MANY AS YOU WANT</p>
-            <Btn disabled={!vibe} onClick={()=>this.setStep(1)}>Next →</Btn>
+            <p style={{ fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em",marginBottom:16 }}>{copy.components.postDate.step1.instruction}</p>
+            <Btn disabled={!vibe} onClick={()=>this.setStep(1)}>{copy.components.postDate.next}</Btn>
           </div>
         )}
 
         {step===1&&(
           <div className="fu d1">
-            <h2 style={{ fontFamily:"var(--serif)",fontSize:28,fontStyle:"italic",fontWeight:400,color:"var(--white)",marginBottom:28,lineHeight:1.2 }}>Two questions.</h2>
-            <Mono style={{ display:"block",marginBottom:10 }}>What was great</Mono>
-            {ta("The moment, the feeling, the detail…",great,this.setGreat)}
+            <h2 style={{ fontFamily:"var(--serif)",fontSize:28,fontStyle:"italic",fontWeight:400,color:"var(--white)",marginBottom:28,lineHeight:1.2 }}>{copy.components.postDate.step2.title}</h2>
+            <Mono style={{ display:"block",marginBottom:10 }}>{copy.components.postDate.step2.greatLabel}</Mono>
+            {ta(copy.components.postDate.step2.greatPlaceholder,great,this.setGreat)}
             <div style={{ height:16 }}/>
-            <Mono style={{ display:"block",marginBottom:10 }}>What was not so great</Mono>
-            {ta("Honest is useful. This is only for you.",notso,this.setNotso,3)}
+            <Mono style={{ display:"block",marginBottom:10 }}>{copy.components.postDate.step2.notGreatLabel}</Mono>
+            {ta(copy.components.postDate.step2.notGreatPlaceholder,notso,this.setNotso,3)}
             <div style={{ height:20 }}/>
-            <Btn onClick={()=>this.setStep(2)}>Next →</Btn>
+            <Btn onClick={()=>this.setStep(2)}>{copy.components.postDate.next}</Btn>
           </div>
         )}
 
         {step===2&&(
           <div className="fu d1">
-            <h2 style={{ fontFamily:"var(--serif)",fontSize:28,fontStyle:"italic",fontWeight:400,color:"var(--white)",marginBottom:6,lineHeight:1.2 }}>Anything else?</h2>
-            <p style={{ fontFamily:"var(--serif)",fontSize:14,color:"var(--mid)",fontStyle:"italic",marginBottom:18 }}>Stream of consciousness. Or leave it blank.</p>
-            {ta("This is just for you…",free,this.setFree,9)}
+            <h2 style={{ fontFamily:"var(--serif)",fontSize:28,fontStyle:"italic",fontWeight:400,color:"var(--white)",marginBottom:6,lineHeight:1.2 }}>{copy.components.postDate.step3.title}</h2>
+            <p style={{ fontFamily:"var(--serif)",fontSize:14,color:"var(--mid)",fontStyle:"italic",marginBottom:18 }}>{copy.components.postDate.step3.subtitle}</p>
+            {ta(copy.components.postDate.step3.placeholder,free,this.setFree,9)}
             <div style={{ height:20 }}/>
-            <Btn onClick={()=>this.setStep(3)}>Save to field notes →</Btn>
+            <Btn onClick={()=>this.setStep(3)}>{copy.components.postDate.save}</Btn>
           </div>
         )}
       </Screen>

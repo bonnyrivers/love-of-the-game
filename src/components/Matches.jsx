@@ -1,5 +1,6 @@
 import React from 'react';
 import { Screen, Mono, Btn, Rule } from "./UI";
+import copy from '../copy.js';
 
 // ══════════════════════════════════════════════════════════════════════════════
 // MATCHES — no % scores, "why matched" bubble, availability request
@@ -37,11 +38,11 @@ class Matches extends React.Component {
       const m = MATCHES[sel];
       return (
         <Screen style={{ paddingBottom:90 }}>
-          <button onClick={()=>this.setSel(null)} style={{ background:"none",border:"none",cursor:"pointer",fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em",marginBottom:24,padding:0,textAlign:"left" }}>← back</button>
+          <button onClick={()=>this.setSel(null)} style={{ background:"none",border:"none",cursor:"pointer",fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em",marginBottom:24,padding:0,textAlign:"left" }}>{copy.components.matches.matchCard.back}</button>
           <div className="fu d1">
             <Mono style={{ display:"block",marginBottom:7 }}>{m.dist} · {m.sign} · {m.hd}</Mono>
             <h2 style={{ fontFamily:"var(--serif)",fontSize:50,fontStyle:"italic",fontWeight:400,color:"var(--white)",lineHeight:1,marginBottom:4 }}>{m.name}</h2>
-            <Mono>{m.age} years old</Mono>
+            <Mono>{copy.components.matches.matchCard.yearsOld.replace('{age}', m.age)}</Mono>
           </div>
 
           {/* B&W photos — up to 3 */}
@@ -60,14 +61,14 @@ class Matches extends React.Component {
 
           {/* Why matched — no percentages */}
           <div className="fu d3" style={{ background:"var(--bg2)",border:"1px solid var(--line)",padding:"16px",marginBottom:18 }}>
-            <Mono style={{ display:"block",marginBottom:8 }}>Why we matched you</Mono>
+            <Mono style={{ display:"block",marginBottom:8 }}>{copy.components.matches.matchDetail.whyMatched}</Mono>
             <p style={{ fontFamily:"var(--serif)",fontSize:15,fontStyle:"italic",color:"var(--text)",lineHeight:1.65 }}>{m.why}</p>
           </div>
 
           {/* Schedule overlap — the one stat */}
           <div className="fu d3" style={{ border:"1px solid var(--line)",padding:"14px 16px",background:"var(--bg1)",marginBottom:18 }}>
             <div style={{ display:"flex",justifyContent:"space-between",marginBottom:8 }}>
-              <Mono>Schedule overlap this week</Mono>
+              <Mono>{copy.components.matches.matchDetail.scheduleOverlap}</Mono>
               <Mono style={{ color:"var(--white)" }}>{m.scheduleOverlap}%</Mono>
             </div>
             <div style={{ height:1,background:"var(--line)" }}>
@@ -83,30 +84,30 @@ class Matches extends React.Component {
           {/* Availability request */}
           <div className="fu d4" style={{ marginBottom:20 }}>
             <button onClick={()=>this.setReqOpen(!this.state.reqOpen)} style={{ background:"none",border:"none",cursor:"pointer",fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em",padding:0,textDecoration:"underline" }}>
-              {reqOpen?"Cancel request":"Request different availability →"}
+              {reqOpen?copy.components.matches.matchDetail.cancelRequest:copy.components.matches.matchDetail.requestAvail}
             </button>
             {reqOpen&&(
               <div className="fi" style={{ marginTop:12 }}>
                 <p style={{ fontFamily:"var(--serif)",fontSize:14,fontStyle:"italic",color:"var(--mid)",marginBottom:10,lineHeight:1.5 }}>
-                  Send a one-time message asking {m.name} to open a specific window. They can accept or ignore.
+                  {copy.components.matches.matchDetail.requestMessage.replace('{name}', m.name)}
                 </p>
                 <textarea value={reqMsg} onChange={e=>this.setReqMsg(e.target.value)} rows={2}
-                  placeholder={`e.g. "Would you be free Tuesday evening instead?"`}
+                  placeholder={copy.components.matches.matchDetail.requestPlaceholder}
                   style={{ width:"100%",background:"var(--bg1)",border:"1px solid var(--line)",color:"var(--text)",fontFamily:"var(--serif)",fontSize:15,fontStyle:"italic",padding:"10px 12px",outline:"none",resize:"none",lineHeight:1.5,marginBottom:10 }}
                   onFocus={e=>e.target.style.borderColor="var(--soft)"}
                   onBlur={e=>e.target.style.borderColor="var(--line)"}
                 />
-                <Btn small style={{ width:"auto" }} disabled={!reqMsg.trim()} onClick={()=>{ this.setReqOpen(false); this.setReqMsg(""); }}>Send request</Btn>
+                <Btn small style={{ width:"auto" }} disabled={!reqMsg.trim()} onClick={()=>{ this.setReqOpen(false); this.setReqMsg(""); }}>{copy.components.matches.matchDetail.sendRequest}</Btn>
               </div>
             )}
           </div>
 
           <Rule style={{ marginBottom:18 }}/>
           {m.status==="confirmed"
-            ? <Mono style={{ textAlign:"center",display:"block",padding:"12px 0",color:"var(--soft)" }}>Date confirmed ✓</Mono>
+            ? <Mono style={{ textAlign:"center",display:"block",padding:"12px 0",color:"var(--soft)" }}>{copy.components.matches.matchDetail.dateConfirmed}</Mono>
             : <div style={{ display:"flex",flexDirection:"column",gap:10 }}>
-                <Btn onClick={()=>this.setSel(null)}>Accept this match</Btn>
-                <Btn ghost onClick={()=>this.setSel(null)}>Pass</Btn>
+                <Btn onClick={()=>this.setSel(null)}>{copy.components.matches.matchDetail.acceptMatch}</Btn>
+                <Btn ghost onClick={()=>this.setSel(null)}>{copy.components.matches.matchDetail.passMatch}</Btn>
               </div>
           }
         </Screen>
@@ -116,9 +117,9 @@ class Matches extends React.Component {
     return (
       <Screen style={{ paddingBottom:90 }}>
         <div className="fu d1" style={{ marginBottom:26 }}>
-          <Mono>This week</Mono>
-          <h2 style={{ fontFamily:"var(--serif)",fontSize:38,fontStyle:"italic",fontWeight:400,color:"var(--white)",margin:"12px 0 6px" }}>Your matches.</h2>
-          <p style={{ fontFamily:"var(--serif)",fontSize:14,color:"var(--mid)",fontStyle:"italic" }}>3 base · 2 bonus from attendance. Both must accept to confirm.</p>
+          <Mono>{copy.components.matches.header.sectionLabel}</Mono>
+          <h2 style={{ fontFamily:"var(--serif)",fontSize:38,fontStyle:"italic",fontWeight:400,color:"var(--white)",margin:"12px 0 6px" }}>{copy.components.matches.header.title}</h2>
+          <p style={{ fontFamily:"var(--serif)",fontSize:14,color:"var(--mid)",fontStyle:"italic" }}>{copy.components.matches.header.subtitle}</p>
         </div>
         {MATCHES.map((m,i)=>(
           <div key={i} className="fu" style={{ animationDelay:`${i*.07+.08}s`,marginBottom:8 }}>
@@ -131,11 +132,11 @@ class Matches extends React.Component {
                 <p style={{ fontFamily:"var(--serif)",fontSize:22,fontStyle:"italic",color:"var(--white)",marginBottom:5 }}>{m.name}, {m.age}</p>
                 <div style={{ display:"flex",gap:10,alignItems:"center" }}>
                   <Mono>{m.dist}</Mono>
-                  {m.slots.some(s=>s.includes("★"))&&<Mono style={{ color:"var(--soft)",fontSize:8 }}>★ premium slot</Mono>}
+                  {m.slots.some(s=>s.includes("★"))&&<Mono style={{ color:"var(--soft)",fontSize:8 }}>{copy.components.matches.matchDetail.premiumSlot}</Mono>}
                 </div>
               </div>
               <Mono style={{ color:m.status==="confirmed"?"var(--soft)":"var(--dim)" }}>
-                {m.status==="confirmed"?"confirmed ✓":"view →"}
+                {m.status==="confirmed"?copy.components.matches.matchCard.confirmed:copy.components.matches.matchCard.viewMore}
               </Mono>
             </div>
           </div>

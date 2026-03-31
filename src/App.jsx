@@ -1,7 +1,7 @@
 // ══════════════════════════════════════════════════════════════════════════════
 // ROOT
 // ══════════════════════════════════════════════════════════════════════════════
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Splash from "./components/Splash.jsx";
 import { ObName, ObIdentity, ObQuiz, ObLifestyle, ObPhoto, ObAvail } from "./components/Onboarding/index.js";
 import Home from "./components/Home.jsx";
@@ -12,6 +12,7 @@ import CheckIn from "./components/CheckIn.jsx";
 import PostDate from "./components/PostDate.jsx";
 import Lockout from "./components/Lockout.jsx";
 import DeepQuiz from "./components/DeepQuiz.jsx";
+import CopyEditor from "./components/CopyEditor.jsx";
 import Nav from "./components/Nav.jsx";
 import G from "./styles.jsx";
 
@@ -22,6 +23,18 @@ export default function App() {
   const [user, setUser] = useState({});
   const go = (s) => setScreen(s);
   const set = (d) => setUser((p) => ({ ...p, ...d }));
+
+  // Hidden keyboard shortcut to access copy editor
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+        e.preventDefault();
+        go('copy-editor');
+      }
+    };
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
 
   const S = {
     splash: "splash",
@@ -39,6 +52,7 @@ export default function App() {
     "post-date": "post-date",
     lockout: "lockout",
     "deep-quiz": "deep-quiz",
+    "copy-editor": "copy-editor",
   };
 
   const render = () => {
@@ -73,6 +87,8 @@ export default function App() {
         return <Lockout go={go} />;
       case "deep-quiz":
         return <DeepQuiz go={go} />;
+      case "copy-editor":
+        return <CopyEditor go={go} />;
       default:
         return <Home go={go} state={{name: "Bonny"}} />;
     }
@@ -88,6 +104,37 @@ export default function App() {
         {render()}
       </div>
       {MAIN.includes(screen) && <Nav active={screen} go={go} />}
+
+      {/* Hidden copy editor access - subtle button in bottom right */}
+      {screen === 'home' && (
+        <button
+          onClick={() => go('copy-editor')}
+          style={{
+            position: 'fixed',
+            bottom: 20,
+            right: 20,
+            width: 40,
+            height: 40,
+            borderRadius: '50%',
+            background: 'var(--bg1)',
+            border: '1px solid var(--line)',
+            cursor: 'pointer',
+            opacity: 0.3,
+            transition: 'opacity 0.2s',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 12,
+            color: 'var(--dim)',
+            zIndex: 1000
+          }}
+          onMouseEnter={(e) => e.target.style.opacity = '0.8'}
+          onMouseLeave={(e) => e.target.style.opacity = '0.3'}
+          title="Copy Editor (Ctrl+Shift+C)"
+        >
+          ✏️
+        </button>
+      )}
     </div>
   );
 }

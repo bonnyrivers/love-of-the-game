@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mono } from "./UI";
+import copy from '../copy.js';
 
 // ─── NAV ──────────────────────────────────────────────────────────────────────
 class Nav extends React.Component {
@@ -13,7 +14,7 @@ class Nav extends React.Component {
         gridTemplateColumns:"repeat(4,1fr)",zIndex:100,
         paddingBottom:"env(safe-area-inset-bottom,0px)"
       }}>
-        {[{id:"home",sym:"◈",label:"Today"},{id:"matches",sym:"◎",label:"Matches"},{id:"notes",sym:"◫",label:"Field Notes"},{id:"profile",sym:"◻",label:"You"}].map(({id,sym,label})=>(
+        {[{id:"home",sym:"◈",label:copy.components.nav.today},{id:"matches",sym:"◎",label:copy.components.nav.matches},{id:"notes",sym:"◫",label:copy.components.nav.fieldNotes},{id:"profile",sym:"◻",label:copy.components.nav.you}].map(({id,sym,label})=>(
           <button key={id} onClick={()=>go(id)} style={{
             background:"transparent",border:"none",cursor:"pointer",
             padding:"14px 0 10px",display:"flex",flexDirection:"column",alignItems:"center",gap:5
