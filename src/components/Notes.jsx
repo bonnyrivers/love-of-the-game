@@ -80,7 +80,7 @@ class Notes extends React.Component {
       <Screen style={{ paddingBottom:90 }}>
         <div className="fu d1" style={{ marginBottom:22 }}>
           <Mono>Love of the Game</Mono>
-          <h2 style={{ fontFamily:"var(--serif)",fontSize:38,fontStyle:"italic",fontWeight:400,color:"var(--white)",margin:"12px 0 16px" }}>Field notes.</h2>
+          <h2 style={{ margin:"12px 0 16px" }}>Field notes.</h2>
           <div style={{ display:"flex",gap:24 }}>
             <TabBtn id="list" label="Entries"/>
             <TabBtn id="calendar" label="Calendar"/>
@@ -95,7 +95,7 @@ class Notes extends React.Component {
               <div key={i} className="fu" style={{ animationDelay:`${i*.07}s`,marginBottom:9 }}>
                 <div onClick={()=>this.setEntry(i)} style={{
                   border:"1px solid var(--line)",padding:"15px 14px",cursor:"pointer",
-                  background:"var(--bg1)",display:"flex",justifyContent:"space-between",alignItems:"flex-start"
+                  background:"var(--bg1)",display:"flex",justifyContent:"space-between",alignItems:"center"
                 }}>
                   <div>
                     <p style={{ fontFamily:"var(--serif)",fontSize:22,fontStyle:"italic",color:"var(--white)",marginBottom:5 }}>{e.name}</p>

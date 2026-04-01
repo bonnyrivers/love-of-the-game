@@ -2,6 +2,7 @@
 // ROOT
 // ══════════════════════════════════════════════════════════════════════════════
 import { useEffect, useState } from "react";
+import './App.css';
 import Splash from "./components/Splash.jsx";
 import { ObName, ObIdentity, ObQuiz, ObLifestyle, ObPhoto, ObAvail } from "./components/Onboarding/index.js";
 import Home from "./components/Home.jsx";
@@ -96,11 +97,10 @@ export default function App() {
 
   return (
     <div
-      className="grain"
-      style={{ background: "var(--bg)", minHeight: "100dvh" }}
+      className="grain app-container"
     >
       <G />
-      <div key={screen} style={{ animation: "fadeIn .3s ease both" }}>
+      <div key={screen} className="app-screen">
         {render()}
       </div>
       {MAIN.includes(screen) && <Nav active={screen} go={go} />}
@@ -109,27 +109,7 @@ export default function App() {
       {screen === 'home' && (
         <button
           onClick={() => go('copy-editor')}
-          style={{
-            position: 'fixed',
-            bottom: 20,
-            right: 20,
-            width: 40,
-            height: 40,
-            borderRadius: '50%',
-            background: 'var(--bg1)',
-            border: '1px solid var(--line)',
-            cursor: 'pointer',
-            opacity: 0.3,
-            transition: 'opacity 0.2s',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 12,
-            color: 'var(--dim)',
-            zIndex: 1000
-          }}
-          onMouseEnter={(e) => e.target.style.opacity = '0.8'}
-          onMouseLeave={(e) => e.target.style.opacity = '0.3'}
+          className="app-copy-editor-button"
           title="Copy Editor (Ctrl+Shift+C)"
         >
           ✏️

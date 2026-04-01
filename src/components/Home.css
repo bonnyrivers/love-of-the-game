@@ -1,0 +1,203 @@
+/* Home component styles */
+
+.home-screen {
+  padding-bottom: 90px;
+}
+
+.home-header {
+  margin-bottom: 32px;
+}
+
+.home-standing-card {
+  border: 1px solid var(--line);
+  padding: 13px 16px;
+  background: var(--bg1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.home-standing-value {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--white);
+}
+
+.home-confirmed-date-section {
+  margin-bottom: 14px;
+}
+
+.home-confirmed-date-card {
+  border: 1px solid var(--line2);
+  background: var(--bg1);
+  padding: 18px 16px;
+}
+
+.home-date-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.home-date-name {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--white);
+}
+
+.home-date-details {
+  margin-top: 5px;
+  display: block;
+}
+
+.home-date-time {
+  text-align: right;
+}
+
+.home-date-day {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.home-date-time-value {
+  color: var(--white);
+  font-size: 11px;
+}
+
+.home-venue-info {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--soft);
+  margin-bottom: 12px;
+}
+
+.home-why-matched {
+  background: var(--bg2);
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+
+.home-why-matched-title {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 8px;
+}
+
+.home-why-matched-text {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--soft);
+  line-height: 1.6;
+}
+
+.home-schedule-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dim);
+  animation: pulse 2s infinite;
+}
+
+.home-checkin-button {
+  border: 1px solid var(--line2);
+  padding: 13px 16px;
+  margin-bottom: 14px;
+  cursor: pointer;
+  background: var(--bg2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-checkin-label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--soft);
+}
+
+.home-checkin-action {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--white);
+}
+
+.home-checkin-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--soft);
+  animation: pulse 1.5s infinite;
+}
+
+.home-pending-section {
+  margin-bottom: 14px;
+}
+
+.home-pending-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.home-see-all-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+}
+
+.home-pending-item {
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg1);
+}
+
+.home-pending-name {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-style: italic;
+  color: var(--soft);
+}
+
+.home-field-notes-cta {
+  border: 1px dashed var(--line2);
+  padding: 14px 16px;
+  cursor: pointer;
+  background: var(--bg1);
+}
+
+.home-field-notes-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.home-field-notes-message {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--mid);
+  line-height: 1.6;
+}

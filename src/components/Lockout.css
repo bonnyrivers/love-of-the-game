@@ -1,0 +1,97 @@
+/* Lockout component styles */
+
+.lockout-screen {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.lockout-icon {
+  font-size: 44px;
+  margin-bottom: 16px;
+  color: var(--dim);
+}
+
+.lockout-label {
+  color: #7a3025;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.lockout-title {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.lockout-message {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--mid);
+  line-height: 1.75;
+  margin-bottom: 30px;
+  max-width: 270px;
+}
+
+.lockout-days-box {
+  border: 1px solid var(--line);
+  padding: 18px 36px;
+  background: var(--bg1);
+  margin-bottom: 22px;
+  width: 100%;
+}
+
+.lockout-days-title {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--white);
+  font-size: 11px;
+}
+
+.lockout-progress-container {
+  height: 1px;
+  background: var(--line);
+  margin-bottom: 10px;
+}
+
+.lockout-progress-fill {
+  height: 1px;
+  background: var(--soft);
+  width: 14%;
+}
+
+.lockout-unlock-time {
+  font-size: 8px;
+}
+
+.lockout-notes-section {
+  border-left: 1px solid var(--line);
+  padding-left: 12px;
+  text-align: left;
+  margin-bottom: 28px;
+  width: 100%;
+}
+
+.lockout-notes-text {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+  line-height: 1.9;
+}
+
+.lockout-back-button {
+  background: none;
+  border: none;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  cursor: pointer;
+}

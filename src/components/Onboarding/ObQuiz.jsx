@@ -1,6 +1,7 @@
 import React from 'react';
 import { Screen, Mono, Btn } from "../UI";
 import copy from '../../copy.js';
+import './ObQuiz.css';
 
 // ══════════════════════════════════════════════════════════════════════════════
 // 4. QUICK QUIZ — reworked 5 questions
@@ -98,11 +99,11 @@ class ObQuiz extends React.Component {
         </div>
         <div className="fu d1" style={{ paddingTop:12,marginBottom:8,display:"flex",justifyContent:"space-between",alignItems:"center" }}>
           <Mono>{step+1} of {QS.length} — {q.label}</Mono>
-          {step>0&&<button onClick={()=>this.setStep(step-1)} style={{ background:"none",border:"none",cursor:"pointer",fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em" }}>{copy.components.onboarding.obQuiz.back}</button>}
+          {step>0&&<button onClick={()=>this.setStep(step-1)} className="ob-quiz-btn-back">{copy.components.onboarding.obQuiz.back}</button>}
         </div>
         <div className="fu d2" style={{ margin:"24px 0 24px" }}>
-          <h2 style={{ fontFamily:"var(--serif)",fontSize:26,fontWeight:400,fontStyle:"italic",color:"var(--white)",lineHeight:1.25,marginBottom:7 }}>{q.q}</h2>
-          <p style={{ fontFamily:"var(--serif)",fontSize:13,color:"var(--dim)",fontStyle:"italic" }}>{q.hint}</p>
+          <h2 className="onboarding-h2-small">{q.q}</h2>
+          <p className="onboarding-p-hint">{q.hint}</p>
         </div>
 
         {/* Double question — love languages */}
@@ -111,25 +112,13 @@ class ObQuiz extends React.Component {
             <Mono style={{ display:"block",marginBottom:12 }}>{copy.components.onboarding.obQuiz.q5.giveLabel}</Mono>
             <div style={{ display:"flex",flexDirection:"column",gap:8,marginBottom:24 }}>
               {q.opts.map(o=>(
-                <button key={`g-${o}`} onClick={()=>this.setGive(o)} style={{
-                  border:`1px solid ${give===o?"var(--soft)":"var(--line)"}`,
-                  background:give===o?"var(--bg2)":"transparent",
-                  color:give===o?"var(--white)":"var(--mid)",
-                  fontFamily:"var(--serif)",fontSize:16,fontStyle:"italic",
-                  padding:"13px 16px",cursor:"pointer",transition:"all .14s",textAlign:"left"
-                }}>{o}</button>
+                <button key={`g-${o}`} onClick={()=>this.setGive(o)} className={`option-button quiz ${give===o ? 'selected' : ''}`}>{o}</button>
               ))}
             </div>
             <Mono style={{ display:"block",marginBottom:12 }}>{copy.components.onboarding.obQuiz.q5.receiveLabel}</Mono>
             <div style={{ display:"flex",flexDirection:"column",gap:8 }}>
               {q.opts.map(o=>(
-                <button key={`r-${o}`} onClick={()=>this.setReceive(o)} style={{
-                  border:`1px solid ${receive===o?"var(--soft)":"var(--line)"}`,
-                  background:receive===o?"var(--bg2)":"transparent",
-                  color:receive===o?"var(--white)":"var(--mid)",
-                  fontFamily:"var(--serif)",fontSize:16,fontStyle:"italic",
-                  padding:"13px 16px",cursor:"pointer",transition:"all .14s",textAlign:"left"
-                }}>{o}</button>
+                <button key={`r-${o}`} onClick={()=>this.setReceive(o)} className={`option-button quiz ${receive===o ? 'selected' : ''}`}>{o}</button>
               ))}
             </div>
           </div>
@@ -138,13 +127,7 @@ class ObQuiz extends React.Component {
             {q.opts.map(opt=>{
               const on=q.multi?(cur||[]).includes(opt):cur===opt;
               return (
-                <button key={opt} onClick={()=>this.pick(opt)} style={{
-                  border:`1px solid ${on?"var(--soft)":"var(--line)"}`,
-                  background:on?"var(--bg2)":"transparent",
-                  color:on?"var(--white)":"var(--mid)",
-                  fontFamily:"var(--serif)",fontSize:17,fontStyle:"italic",
-                  padding:"14px 16px",cursor:"pointer",transition:"all .14s",textAlign:"left",lineHeight:1.3
-                }}>{opt}</button>
+                <button key={opt} onClick={()=>this.pick(opt)} className={`option-button quiz large ${on ? 'selected' : ''}`}>{opt}</button>
               );
             })}
           </div>
@@ -156,7 +139,7 @@ class ObQuiz extends React.Component {
             this.props.set({quickAnswers:answers});
             step<QS.length-1 ? this.setStep(step+1) : this.props.go("ob-lifestyle");
           }}>{step<QS.length-1?copy.components.onboarding.obQuiz.next:copy.components.onboarding.obQuiz.continue}</Btn>
-          {q.multi&&<p style={{ fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",textAlign:"center",marginTop:10,letterSpacing:"0.1em" }}>{copy.components.onboarding.obQuiz.selectAll}</p>}
+          {q.multi&&<p className="ob-quiz-p-select">{copy.components.onboarding.obQuiz.selectAll}</p>}
         </div>
       </Screen>
     );

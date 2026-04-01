@@ -1,0 +1,23 @@
+.ob-lifestyle-p-bucket-hint {
+  /* Uses shared .onboarding-p-hint styles with margin-bottom: 14px */
+  margin-bottom: 14px;
+}
+
+.ob-lifestyle-radius-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ob-lifestyle-range-input {
+  width: 100%;
+  accent-color: var(--white);
+  cursor: pointer;
+}
+
+.ob-lifestyle-radius-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}

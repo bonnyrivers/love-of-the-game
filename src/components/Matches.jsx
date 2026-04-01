@@ -118,7 +118,7 @@ class Matches extends React.Component {
       <Screen style={{ paddingBottom:90 }}>
         <div className="fu d1" style={{ marginBottom:26 }}>
           <Mono>{copy.components.matches.header.sectionLabel}</Mono>
-          <h2 style={{ fontFamily:"var(--serif)",fontSize:38,fontStyle:"italic",fontWeight:400,color:"var(--white)",margin:"12px 0 6px" }}>{copy.components.matches.header.title}</h2>
+          <h2 style={{ margin:"12px 0 6px" }}>{copy.components.matches.header.title}</h2>
           <p style={{ fontFamily:"var(--serif)",fontSize:14,color:"var(--mid)",fontStyle:"italic" }}>{copy.components.matches.header.subtitle}</p>
         </div>
         {MATCHES.map((m,i)=>(

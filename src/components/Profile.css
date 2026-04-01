@@ -1,0 +1,156 @@
+/* Profile component styles */
+
+.profile-screen {
+  padding-bottom: 90px;
+}
+
+.profile-header {
+  margin-bottom: 24px;
+}
+
+.profile-name {
+  font-family: var(--serif);
+  font-size: 44px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--white);
+  margin-top: 10px;
+  line-height: 1;
+}
+
+.profile-details {
+  margin-top: 8px;
+  display: block;
+}
+
+.profile-photo-container {
+  border: 1px solid var(--line);
+  height: 165px;
+  background: var(--bg1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.profile-photo-placeholder {
+  color: var(--line2);
+  font-size: 24px;
+}
+
+.profile-photo-label {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: var(--bg);
+  border: 1px solid var(--line2);
+  font-family: var(--mono);
+  font-size: 7px;
+  color: var(--soft);
+  letter-spacing: 0.1em;
+  padding: 4px 8px;
+}
+
+.profile-edit-button {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  border: 1px solid var(--line2);
+  background: var(--bg);
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  padding: 5px 9px;
+  cursor: pointer;
+}
+
+.profile-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.profile-stat-card {
+  border: 1px solid var(--line);
+  padding: 12px 13px;
+  background: var(--bg1);
+}
+
+.profile-stat-value {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-style: italic;
+  color: var(--white);
+}
+
+.profile-attendance-note {
+  border: 1px solid var(--line2);
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  background: var(--bg2);
+}
+
+.profile-detail-item {
+  border: 1px solid var(--line);
+  padding: 13px 14px;
+  margin-bottom: 8px;
+  background: var(--bg1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-detail-value {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--mid);
+}
+
+.profile-deep-quiz-section {
+  border: 1px dashed var(--line2);
+  padding: 16px 14px;
+  margin-top: 8px;
+  background: var(--bg1);
+}
+
+.profile-deep-quiz-description {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--mid);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.profile-deep-quiz-button {
+  background: none;
+  border: none;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--soft);
+  cursor: pointer;
+  padding: 0;
+}
+
+.profile-footer-buttons {
+  margin-top: 22px;
+  display: flex;
+  gap: 20px;
+}
+
+.profile-footer-button {
+  background: none;
+  border: none;
+  font-family: var(--mono);
+  font-size: 7px;
+  color: var(--dim);
+  cursor: pointer;
+  text-decoration: underline;
+  letter-spacing: 0.1em;
+}

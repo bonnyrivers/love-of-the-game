@@ -1,0 +1,159 @@
+.ob-photo-btn-retake {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--bg);
+  border: 1px solid var(--line2);
+  font-family: var(--mono);
+  font-size: 7px;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+  padding: 5px 9px;
+  cursor: pointer;
+}
+
+.ob-photo-upload-area {
+  border: 1px dashed var(--line2);
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  gap: 10px;
+  margin-bottom: 10px;
+  background: var(--bg1);
+  transition: border-color 0.15s;
+}
+
+.ob-photo-live-area {
+  border: 1px solid var(--line);
+  padding: 18px 16px;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.16s;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ob-photo-live-area.selected {
+  border-color: var(--soft);
+  background: var(--bg2);
+  cursor: default;
+}
+
+.ob-photo-capture-area {
+  border: 1px solid var(--line);
+  background: var(--bg1);
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.ob-photo-h2 {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--white);
+  margin: 14px 0 6px;
+  line-height: 1.1;
+}
+
+.ob-photo-p-description {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--mid);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.ob-photo-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: var(--bg);
+  border: 1px solid var(--line2);
+  font-family: var(--mono);
+  font-size: 7px;
+  color: var(--soft);
+  letter-spacing: 0.1em;
+  padding: 4px 8px;
+}
+
+.ob-photo-span-upload-icon {
+  font-size: 22px;
+  color: var(--dim);
+}
+
+.ob-photo-span-required {
+  color: var(--dim);
+}
+
+.ob-photo-span-live-icon {
+  font-size: 18px;
+  color: var(--dim);
+}
+
+.ob-photo-span-live-icon.selected {
+  color: var(--white);
+}
+
+.ob-photo-div-live-content {
+  flex: 1;
+}
+
+.ob-photo-p-live-text {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--mid);
+}
+
+.ob-photo-p-live-text.selected {
+  color: var(--white);
+}
+
+.ob-photo-p-privacy {
+  font-family: var(--serif);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--dim);
+  margin-top: 3px;
+}
+
+.ob-photo-span-checkmark {
+  color: var(--white);
+}
+
+.ob-photo-pulse-container {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.ob-photo-pulse-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dim);
+  animation: pulse 1.5s infinite;
+}
+
+.ob-photo-corner-indicator {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Screen, Mono, Btn } from "../UI";
 import copy from '../../copy.js';
+import './ObAvail.css';
 // ══════════════════════════════════════════════════════════════════════════════
 // AVAILABILITY GRID
 // ══════════════════════════════════════════════════════════════════════════════
@@ -31,30 +32,25 @@ class ObAvail extends React.Component {
       <Screen>
         <div className="fu d1" style={{ marginBottom:22 }}>
           <Mono>{copy.components.onboarding.obAvail.step}</Mono>
-          <h2 style={{ fontFamily:"var(--serif)",fontSize:34,fontStyle:"italic",fontWeight:400,color:"var(--white)",margin:"14px 0 6px",lineHeight:1.1 }}>{copy.components.onboarding.obAvail.title}</h2>
-          <p style={{ fontFamily:"var(--serif)",fontSize:14,color:"var(--mid)",fontStyle:"italic",lineHeight:1.6 }}>
+          <h2 className="onboarding-h2">{copy.components.onboarding.obAvail.title}</h2>
+          <p className="onboarding-p-subtitle">
             {copy.components.onboarding.obAvail.subtitle}
           </p>
         </div>
         <div className="fu d2" style={{ overflowX:"auto",marginBottom:20 }}>
           <div style={{ display:"grid",gridTemplateColumns:`36px repeat(${DAYS.length},1fr)`,gap:3,minWidth:300 }}>
             <div/>
-            {DAYS.map(d=><div key={d} style={{ fontFamily:"var(--mono)",fontSize:7,letterSpacing:"0.08em",color:"var(--mid)",textAlign:"center",paddingBottom:5 }}>{d}</div>)}
+            {DAYS.map(d=><div key={d} className="ob-avail-day-header">{d}</div>)}
             {SLOTS.map(s=>(
               <>
-                <div key={s} style={{ fontFamily:"var(--mono)",fontSize:7,color:"var(--dim)",display:"flex",alignItems:"center" }}>{s}</div>
+                <div key={s} className="ob-avail-slot-label">{s}</div>
                 {DAYS.map(d=>{
                   const k=`${d}-${s}`, on=avail[k], prem=isPremium(d,s);
                   return (
-                    <div key={k} onClick={()=>this.toggle(d,s)} style={{
-                      border:`1px solid ${on?"var(--soft)":"var(--line)"}`,
-                      background:on?"var(--bg3)":"transparent",
-                      height:34,cursor:"pointer",display:"flex",alignItems:"center",
-                      justifyContent:"center",transition:"all .1s",position:"relative"
-                    }}>
-                      {on&&<div style={{ width:5,height:5,borderRadius:"50%",background:"var(--white)" }}/>}
-                      {prem&&!on&&<span style={{ fontSize:7,color:"var(--line2)" }}>★</span>}
-                      {prem&&on&&<span style={{ fontSize:6,color:"var(--soft)",position:"absolute",top:2,right:2 }}>★</span>}
+                    <div key={k} onClick={()=>this.toggle(d,s)} className={`ob-avail-grid-cell ${on ? 'selected' : ''}`}>
+                      {on&&<div className="ob-avail-dot"/>}
+                      {prem&&!on&&<span className="ob-avail-star-unselected">★</span>}
+                      {prem&&on&&<span className="ob-avail-star-selected">★</span>}
                     </div>
                   );
                 })}
@@ -63,7 +59,7 @@ class ObAvail extends React.Component {
           </div>
         </div>
         <div className="fu d3" style={{ borderLeft:"1px solid var(--line)",paddingLeft:12,marginBottom:24 }}>
-          <p style={{ fontFamily:"var(--mono)",fontSize:8,letterSpacing:"0.08em",color:"var(--mid)",lineHeight:1.9 }}>
+          <p className="ob-avail-p-notes">
             {copy.components.onboarding.obAvail.notes.map(note => <>{note}<br/></>)}
           </p>
         </div>

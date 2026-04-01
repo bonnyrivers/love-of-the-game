@@ -1,6 +1,6 @@
 // ─── UI ───────────────────────────────────────────────────────────────
 export const Mono = ({ children, style={} }) => (
-  <span style={{ fontFamily:"var(--mono)",fontSize:9,letterSpacing:"0.2em",textTransform:"uppercase",color:"var(--mid)",...style }}>{children}</span>
+  <p style={{ fontFamily:"var(--mono)",fontSize:9,letterSpacing:"0.2em",textTransform:"uppercase",color:"var(--mid)",...style }}>{children}</p>
 );
 export const Rule = ({ style={} }) => <div style={{ height:1,background:"var(--line)",...style }}/>;
 

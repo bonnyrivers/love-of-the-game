@@ -1,0 +1,90 @@
+.check-in-screen {
+  justify-content: center;
+}
+
+.check-in-header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.check-in-status-box {
+  border: 1px solid var(--line);
+  padding: 14px 16px;
+  background: var(--bg1);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.check-in-checking-container {
+  text-align: center;
+  padding: 28px 0;
+}
+
+.check-in-pulse-container {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line2);
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-in-pulse-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dim);
+  animation: pulse 1s infinite;
+}
+
+.check-in-unconfirmed-box {
+  border: 1px solid var(--line2);
+  padding: 14px 16px;
+  background: var(--bg1);
+  margin-bottom: 18px;
+}
+
+.check-in-unconfirmed-title {
+  display: block;
+  margin-bottom: 7px;
+  color: #8b7030;
+}
+
+.check-in-unconfirmed-message {
+  /* Uses shared .onboarding-p-subtitle styles */
+}
+
+.check-in-unconfirmed-question {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--soft);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.check-in-option-button {
+  /* Uses shared .option-button.block styles */
+}
+
+.check-in-option-button.selected {
+  /* Uses shared .option-button.selected styles */
+}
+
+.check-in-no-show-box {
+  border: 1px solid var(--line);
+  padding: 16px;
+  background: var(--bg1);
+  margin-bottom: 18px;
+}
+
+.check-in-no-show-title {
+  display: block;
+  margin-bottom: 7px;
+}
+
+.check-in-no-show-message {
+  /* Uses shared .onboarding-p-subtitle styles */
+}

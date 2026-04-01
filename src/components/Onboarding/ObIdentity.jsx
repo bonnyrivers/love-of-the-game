@@ -4,6 +4,7 @@
 import React from 'react';
 import { Mono, Screen, Chip, Btn } from "../UI";
 import copy from '../../copy.js';
+import './ObIdentity.css';
 
 // ══════════════════════════════════════════════════════════════════════════════
 class ObIdentity extends React.Component {
@@ -32,9 +33,9 @@ class ObIdentity extends React.Component {
       <Screen>
         <div className="fu d1" style={{ marginBottom:32 }}>
           <Mono>{copy.components.onboarding.obIdentity.step}</Mono>
-          <h2 style={{ fontFamily:"var(--serif)",fontSize:34,fontStyle:"italic",fontWeight:400,color:"var(--white)",margin:"14px 0" }}>{copy.components.onboarding.obIdentity.title}</h2>
+          <h2 className="onboarding-h2">{copy.components.onboarding.obIdentity.title}</h2>
         </div>
-        <div style={{ display:"flex",flexDirection:"column",gap:28,flex:1 }}>
+        <div className="onboarding-main-container gap-28">
           <div className="fu d2">
             <Mono style={{ display:"block",marginBottom:12 }}>{copy.components.onboarding.obIdentity.iAmA}</Mono>
             <div style={{ display:"flex",flexWrap:"wrap",gap:8 }}>
@@ -49,7 +50,7 @@ class ObIdentity extends React.Component {
           </div>
           <div className="fu d4">
             <Mono style={{ display:"block",marginBottom:4 }}>{copy.components.onboarding.obIdentity.sunSign}</Mono>
-            <p style={{ fontFamily:"var(--serif)",fontSize:12,fontStyle:"italic",color:"var(--dim)",marginBottom:12 }}>{copy.components.onboarding.obIdentity.sunSignHint}</p>
+            <p className="onboarding-p-hint-small">{copy.components.onboarding.obIdentity.sunSignHint}</p>
             <div style={{ display:"flex",flexWrap:"wrap",gap:7 }}>
               {copy.components.onboarding.obIdentity.zodiacSigns.map(s=><Chip key={s} label={s} active={sign===s} onClick={()=>this.setSign(s)}/>)}
             </div>

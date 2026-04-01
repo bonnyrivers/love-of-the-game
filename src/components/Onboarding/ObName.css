@@ -1,0 +1,21 @@
+.ob-name-header {
+  margin-bottom: 40px;
+}
+
+.ob-name-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line2);
+  color: var(--white);
+  font-family: var(--serif);
+  font-size: 28px;
+  font-style: italic;
+  padding: 10px 0;
+  outline: none;
+  margin-top: 8px;
+}
+
+.ob-name-input:focus {
+  border-bottom-color: var(--soft);
+}

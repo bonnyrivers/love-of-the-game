@@ -240,7 +240,7 @@ const CopyEditor = ({ go }) => {
     <Screen>
       <div className="fu d1" style={{ marginBottom: 24 }}>
         <Mono>Copy Editor</Mono>
-        <h2 style={{ fontFamily: "var(--serif)", fontSize: 34, fontStyle: "italic", fontWeight: 400, color: "var(--white)", margin: "14px 0 6px", lineHeight: 1.1 }}>
+        <h2 className="onboarding-h2">
           Edit All Copy Strings
         </h2>
         <p style={{ fontFamily: "var(--serif)", fontSize: 14, color: "var(--mid)", fontStyle: "italic", lineHeight: 1.6 }}>

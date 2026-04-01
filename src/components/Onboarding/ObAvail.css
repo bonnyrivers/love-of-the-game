@@ -1,0 +1,61 @@
+.ob-avail-day-header {
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.ob-avail-slot-label {
+  font-family: var(--mono);
+  font-size: 7px;
+  color: var(--dim);
+  display: flex;
+  align-items: center;
+}
+
+.ob-avail-grid-cell {
+  border: 1px solid var(--line);
+  background: transparent;
+  height: 34px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s;
+  position: relative;
+}
+
+.ob-avail-grid-cell.selected {
+  border-color: var(--soft);
+  background: var(--bg3);
+}
+
+.ob-avail-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--white);
+}
+
+.ob-avail-star-unselected {
+  font-size: 7px;
+  color: var(--line2);
+}
+
+.ob-avail-star-selected {
+  font-size: 6px;
+  color: var(--soft);
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.ob-avail-p-notes {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+  line-height: 1.9;
+}

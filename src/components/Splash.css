@@ -1,0 +1,49 @@
+/* Splash component styles */
+
+.splash-screen {
+  justify-content: space-between;
+}
+
+.splash-header-section {
+  margin-bottom: 48px;
+}
+
+.splash-divider {
+  width: 24px;
+  height: 1px;
+  background: var(--line2);
+  margin-bottom: 20px;
+}
+
+.splash-title {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--white);
+  line-height: 0.97;
+  letter-spacing: -0.02em;
+}
+
+.splash-subtitle {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--mid);
+  font-style: italic;
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.splash-description {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--dim);
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.splash-button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

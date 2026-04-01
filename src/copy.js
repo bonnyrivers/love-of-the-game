@@ -269,7 +269,7 @@ export default {
     },
     "onboarding": {
       "obName": {
-        "step": "1 — 6",
+        "step": "1 of 6",
         "title": "Start here.",
         "subtitle": "No handle. No headline. Just you.",
         "firstNameLabel": "First name",
@@ -277,7 +277,7 @@ export default {
         "continue": "Continue →"
       },
       "obIdentity": {
-        "step": "2 — 6",
+        "step": "2 of 6",
         "title": "Who you are.",
         "iAmA": "I am a",
         "genders": ["Man", "Woman", "Non-binary", "Other"],
@@ -289,6 +289,9 @@ export default {
         "continue": "Continue →"
       },
       "obQuiz": {
+        "step": "3 of 6",
+        "title": "What you want.",
+        "subtitle": "This is the heart of your profile and your matches. Be honest. Be specific. Don't overthink it.",
         "q1": {
           "label": "How you spend your time",
           "question": "How do you actually spend your free time?",
@@ -362,7 +365,7 @@ export default {
         "continue": "Continue →"
       },
       "obLifestyle": {
-        "step": "4 — 6",
+        "step": "4 of 6",
         "title": "What you want to do.",
         "subtitle": "This drives venue suggestions and helps us match people with compatible date energy.",
         "profession": {
