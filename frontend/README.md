@@ -4,4 +4,4 @@
 
 A modern dating app. Made with React Native.
 
-<img width="500" alt="lotg-demo-fd1973b08817 herokuapp com_" src="https://github.com/user-attachments/assets/ae87baba-873b-44e9-9fa4-717f1af73d94" />
+<img width="500" alt="lotg-demo-fd1973b08817 herokuapp com_ (1)" src="https://github.com/user-attachments/assets/a0ad7e68-0e38-4369-8a11-b586379c793f" />
