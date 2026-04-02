@@ -5,3 +5,9 @@
 A modern dating app. Made with Vite, React, GraphQL, and Django.
 
 <img width="500" alt="lotg-demo-fd1973b08817 herokuapp com_ (1)" src="https://github.com/user-attachments/assets/a0ad7e68-0e38-4369-8a11-b586379c793f" />
+
+### Pushing Changes
+
+1. `git push origin main` for changes to github
+2. `git push heroku main` for changes to the React web app
+3. `git push heroku-api main` for changes to the Django Backend
