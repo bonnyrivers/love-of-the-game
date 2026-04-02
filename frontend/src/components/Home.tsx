@@ -1,6 +1,7 @@
+// @ts-nocheck
 import React from 'react';
-import { Screen, Mono, Rule, Btn } from "./UI.jsx";
-import copy from '../copy.js';
+import { Screen, Mono, Rule, Btn } from "./UI.tsx";
+import copy from '../copy.ts';
 import './Home.css';
 
 // ══════════════════════════════════════════════════════════════════════════════

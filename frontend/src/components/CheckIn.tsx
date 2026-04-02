@@ -1,6 +1,7 @@
+// @ts-nocheck
 import React from 'react';
-import { Mono, Screen, Btn } from "./UI.jsx";
-import copy from '../copy.js';
+import { Mono, Screen, Btn } from "./UI.tsx";
+import copy from '../copy.ts';
 import './CheckIn.css';
 
 // ══════════════════════════════════════════════════════════════════════════════

@@ -1,6 +1,7 @@
+// @ts-nocheck
 import React from 'react';
-import { Mono } from "./UI.jsx";
-import copy from '../copy.js';
+import { Mono } from "./UI.tsx";
+import copy from '../copy.ts';
 
 // ─── NAV ──────────────────────────────────────────────────────────────────────
 class Nav extends React.Component {

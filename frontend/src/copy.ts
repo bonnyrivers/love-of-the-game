@@ -1,3 +1,4 @@
+// @ts-nocheck
 const copy = {};
 
 let loaded = false;

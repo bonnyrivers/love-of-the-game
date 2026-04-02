@@ -1,7 +1,8 @@
+// @ts-nocheck
 import React from 'react';
-import { Screen, Mono, Btn } from "../UI.jsx";
-import copy from '../../copy.js';
-import { upsertOnboardingProfile } from "../../services/profileApi.js";
+import { Screen, Mono, Btn } from "../UI.tsx";
+import copy from '../../copy.ts';
+import { upsertOnboardingProfile } from "../../services/profileApi.ts";
 import './ObAvail.css';
 // ══════════════════════════════════════════════════════════════════════════════
 // AVAILABILITY GRID

@@ -1,9 +1,10 @@
+// @ts-nocheck
 // ══════════════════════════════════════════════════════════════════════════════
 // LIFESTYLE — reframed as "what you want to do on dates + bucket list"
 
 import React from 'react';
-import { Mono, Screen, Chip, Btn } from "../UI.jsx";
-import copy from '../../copy.js';
+import { Mono, Screen, Chip, Btn } from "../UI.tsx";
+import copy from '../../copy.ts';
 import './ObLifestyle.css';
 
 // ══════════════════════════════════════════════════════════════════════════════

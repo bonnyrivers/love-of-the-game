@@ -1,3 +1,4 @@
+// @ts-nocheck
 // ─── UI ───────────────────────────────────────────────────────────────
 export const Mono = ({ children, style = {}, className = "" }) => (
   <p className={className} style={{ fontFamily:"var(--mono)",fontSize:9,letterSpacing:"0.2em",textTransform:"uppercase",color:"var(--mid)",...style }}>{children}</p>

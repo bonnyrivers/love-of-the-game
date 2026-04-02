@@ -1,10 +1,11 @@
+// @ts-nocheck
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
 import { HttpLink } from "@apollo/client/link/http";
-import { loadCopy } from "./copy.js";
+import { loadCopy } from "./copy.ts";
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: "http://localhost:8000/graphql/" }),
@@ -12,7 +13,7 @@ const client = new ApolloClient({
 });
 
 await loadCopy();
-const { default: App } = await import("./App.jsx");
+const { default: App } = await import("./App.tsx");
 
 const root = createRoot(document.getElementById("root"));
 root.render(

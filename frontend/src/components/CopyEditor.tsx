@@ -1,6 +1,7 @@
+// @ts-nocheck
 import React, { useState } from 'react';
-import { Screen, Mono, Btn } from "./UI.jsx";
-import copy from '../copy.js';
+import { Screen, Mono, Btn } from "./UI.tsx";
+import copy from '../copy.ts';
 import './CopyEditor.css';
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -163,10 +164,10 @@ const CopyEditor = ({ go }) => {
     try {
       if ('showSaveFilePicker' in window) {
         const handle = await window.showSaveFilePicker({
-          suggestedName: 'copy.js',
+          suggestedName: 'copy.ts',
           types: [{
             description: 'JavaScript files',
-            accept: {'text/javascript': ['.js']}
+            accept: {'text/javascript': ['.ts']}
           }]
         });
         const writable = await handle.createWritable();
@@ -181,10 +182,10 @@ const CopyEditor = ({ go }) => {
       // Fallback to clipboard
       if (navigator.clipboard) {
         await navigator.clipboard.writeText(output);
-        alert('File System Access API not supported. Updated copy copied to clipboard! Paste it into copy.js');
+        alert('File System Access API not supported. Updated copy copied to clipboard! Paste it into copy.ts');
       } else {
         console.log(output);
-        alert('File System Access API not supported. Updated copy logged to console. Copy and paste it into copy.js');
+        alert('File System Access API not supported. Updated copy logged to console. Copy and paste it into copy.ts');
       }
     }
   };

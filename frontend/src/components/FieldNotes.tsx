@@ -1,6 +1,7 @@
+// @ts-nocheck
 import { useState } from "react";
-import { Screen, Mono, Rule, Btn } from "../../../src/components/UI.jsx";
-import copy from '../copy.js';
+import { Screen, Mono, Rule, Btn } from "../../../src/components/UI.tsx";
+import copy from '../copy.ts';
 
 // ══════════════════════════════════════════════════════════════════════════════
 // 12. FIELD NOTES

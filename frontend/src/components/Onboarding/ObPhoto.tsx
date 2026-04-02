@@ -1,10 +1,11 @@
+// @ts-nocheck
 // ══════════════════════════════════════════════════════════════════════════════
 // PHOTO — B&W filter on upload, live verify separate
 
-import { Mono, Screen } from "../UI.jsx";
-import { Btn } from "../UI.jsx";
+import { Mono, Screen } from "../UI.tsx";
+import { Btn } from "../UI.tsx";
 import { useState, useRef } from "react";
-import copy from '../../copy.js';
+import copy from '../../copy.ts';
 import './ObPhoto.css';
 
 // ══════════════════════════════════════════════════════════════════════════════

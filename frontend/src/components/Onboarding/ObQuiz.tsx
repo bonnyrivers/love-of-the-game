@@ -1,6 +1,7 @@
+// @ts-nocheck
 import React from 'react';
-import { Screen, Mono, Btn } from "../UI.jsx";
-import copy from '../../copy.js';
+import { Screen, Mono, Btn } from "../UI.tsx";
+import copy from '../../copy.ts';
 import './ObQuiz.css';
 
 // ══════════════════════════════════════════════════════════════════════════════

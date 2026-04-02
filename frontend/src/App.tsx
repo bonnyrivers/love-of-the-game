@@ -1,23 +1,24 @@
+// @ts-nocheck
 // ══════════════════════════════════════════════════════════════════════════════
 // ROOT
 // ══════════════════════════════════════════════════════════════════════════════
 import { useEffect, useState } from "react";
 import './App.css';
-import Splash from "./components/Splash.jsx";
-import { ObName, ObIdentity, ObQuiz, ObLifestyle, ObPhoto, ObAvail } from "./components/Onboarding/index.js";
-import Home from "./components/Home.jsx";
-import Matches from "./components/Matches.jsx";
-import Notes from "./components/Notes.jsx";
-import Profile from "./components/Profile.jsx";
-import CheckIn from "./components/CheckIn.jsx";
-import PostDate from "./components/PostDate.jsx";
-import Lockout from "./components/Lockout.jsx";
-import DeepQuiz from "./components/DeepQuiz.jsx";
-import CopyEditor from "./components/CopyEditor.jsx";
-import Nav from "./components/Nav.jsx";
-import G from "./styles.jsx";
-import HelloGraphQL from "./components/HelloGraphQL.jsx";
-import { fetchProfileByEmail } from "./services/profileApi.js";
+import Splash from "./components/Splash.tsx";
+import { ObName, ObIdentity, ObQuiz, ObLifestyle, ObPhoto, ObAvail } from "./components/Onboarding/index.ts";
+import Home from "./components/Home.tsx";
+import Matches from "./components/Matches.tsx";
+import Notes from "./components/Notes.tsx";
+import Profile from "./components/Profile.tsx";
+import CheckIn from "./components/CheckIn.tsx";
+import PostDate from "./components/PostDate.tsx";
+import Lockout from "./components/Lockout.tsx";
+import DeepQuiz from "./components/DeepQuiz.tsx";
+import CopyEditor from "./components/CopyEditor.tsx";
+import Nav from "./components/Nav.tsx";
+import G from "./styles.tsx";
+import HelloGraphQL from "./components/HelloGraphQL.tsx";
+import { fetchProfileByEmail } from "./services/profileApi.ts";
 
 const MAIN = ["home", "matches", "notes", "profile"];
 

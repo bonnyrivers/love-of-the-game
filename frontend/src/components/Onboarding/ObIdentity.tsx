@@ -1,9 +1,10 @@
+// @ts-nocheck
 // ══════════════════════════════════════════════════════════════════════════════
 // 3. IDENTITY
 
 import React from 'react';
-import { Mono, Screen, Chip, Btn } from "../UI.jsx";
-import copy from '../../copy.js';
+import { Mono, Screen, Chip, Btn } from "../UI.tsx";
+import copy from '../../copy.ts';
 import './ObIdentity.css';
 
 // ══════════════════════════════════════════════════════════════════════════════

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Screen, Mono, Rule, Btn } from "./UI";
 import "./Notes.css";

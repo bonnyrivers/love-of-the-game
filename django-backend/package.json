@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@apollo/client": "^4.1.6",
-    "@rollup/plugin-graphql": "^2.0.5",
-    "graphql": "^16.13.2"
-  }
-}
