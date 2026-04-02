@@ -1,0 +1,128 @@
+/* CopyEditor component styles */
+
+.copy-editor-header {
+  margin-bottom: 24px;
+}
+
+.copy-editor-description {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--mid);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.copy-editor-search-wrap {
+  margin-bottom: 20px;
+}
+
+.copy-editor-search {
+  width: 100%;
+  background: var(--bg1);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 16px;
+  font-style: italic;
+  padding: 12px 14px;
+  outline: none;
+}
+
+.copy-editor-search:focus {
+  border-color: var(--soft);
+}
+
+.copy-editor-scroll {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.copy-editor-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.copy-editor-action-btn {
+  flex: 1;
+}
+
+.copy-editor-node {
+  margin-bottom: 16px;
+}
+
+.copy-editor-leaf {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: var(--bg1);
+  border: 1px solid var(--line);
+}
+
+.copy-editor-path {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 10px;
+  color: var(--soft);
+}
+
+.copy-editor-array-path {
+  font-size: 10px;
+  color: var(--dim);
+  margin-bottom: 4px;
+}
+
+.copy-editor-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--white);
+  padding: 8px 0;
+  text-align: left;
+  width: 100%;
+}
+
+.copy-editor-toggle-label {
+  color: var(--dim);
+}
+
+.copy-editor-toggle-label.expanded {
+  color: var(--soft);
+}
+
+.copy-editor-children {
+  margin-left: 20px;
+  margin-top: 8px;
+}
+
+.copy-editor-array-item {
+  margin-bottom: 8px;
+}
+
+.copy-editor-textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--line2);
+  color: var(--text);
+  font-family: var(--serif);
+  font-style: italic;
+  outline: none;
+  resize: vertical;
+}
+
+.copy-editor-textarea:focus {
+  border-color: var(--soft);
+}
+
+.copy-editor-textarea.base {
+  min-height: 60px;
+  font-size: 14px;
+  padding: 8px;
+}
+
+.copy-editor-textarea.array {
+  min-height: 40px;
+  font-size: 13px;
+  padding: 6px;
+}

@@ -7,12 +7,34 @@
   text-align: center;
 }
 
+.check-in-header-meta {
+  display: block;
+  margin-bottom: 14px;
+}
+
 .check-in-status-box {
   border: 1px solid var(--line);
   padding: 14px 16px;
   background: var(--bg1);
   margin-bottom: 20px;
   text-align: center;
+}
+
+.check-in-status-text {
+  line-height: 1.9;
+  display: block;
+}
+
+.check-in-status-sub {
+  color: var(--mid);
+}
+
+.check-in-btn-gap {
+  margin-top: 10px;
+}
+
+.check-in-btn-gap-sm {
+  margin-top: 8px;
 }
 
 .check-in-checking-container {

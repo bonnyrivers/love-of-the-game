@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Screen, Mono, Btn } from "./UI.jsx";
 import copy from '../copy.js';
+import './CopyEditor.css';
 
 // ══════════════════════════════════════════════════════════════════════════════
 // COPY EDITOR — Hidden page for updating all copy strings
@@ -25,73 +26,35 @@ const CopyEditor = ({ go }) => {
 
     if (typeof value === 'string') {
       return (
-        <div key={pathString} style={{ marginBottom: 16, padding: '12px', background: 'var(--bg1)', border: '1px solid var(--line)' }}>
-          <Mono style={{ display: 'block', marginBottom: 8, fontSize: 10, color: 'var(--soft)' }}>{pathString}</Mono>
+        <div key={pathString} className="copy-editor-leaf">
+          <Mono className="copy-editor-path">{pathString}</Mono>
           <textarea
             defaultValue={value}
-            style={{
-              width: '100%',
-              minHeight: '60px',
-              background: 'transparent',
-              border: '1px solid var(--line2)',
-              color: 'var(--text)',
-              fontFamily: 'var(--serif)',
-              fontSize: 14,
-              fontStyle: 'italic',
-              padding: '8px',
-              outline: 'none',
-              resize: 'vertical'
-            }}
-            onFocus={(e) => e.target.style.borderColor = 'var(--soft)'}
-            onBlur={(e) => e.target.style.borderColor = 'var(--line2)'}
+            className="copy-editor-textarea base"
           />
         </div>
       );
     } else if (Array.isArray(value)) {
       return (
-        <div key={pathString} style={{ marginBottom: 16 }}>
+        <div key={pathString} className="copy-editor-node">
           <button
             onClick={() => toggleSection(pathString)}
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontFamily: 'var(--mono)',
-              fontSize: 12,
-              color: 'var(--white)',
-              padding: '8px 0',
-              textAlign: 'left',
-              width: '100%'
-            }}
+            className="copy-editor-toggle"
           >
-            <Mono style={{ color: expandedSections.has(pathString) ? 'var(--soft)' : 'var(--dim)' }}>
+            <Mono className={`copy-editor-toggle-label${expandedSections.has(pathString) ? ' expanded' : ''}`}>
               {expandedSections.has(pathString) ? '▼' : '▶'} {key} [{value.length}]
             </Mono>
           </button>
           {expandedSections.has(pathString) && (
-            <div style={{ marginLeft: 20, marginTop: 8 }}>
+            <div className="copy-editor-children">
               {value.map((item, index) => (
-                <div key={`${pathString}[${index}]`} style={{ marginBottom: 8 }}>
-                  <Mono style={{ fontSize: 10, color: 'var(--dim)', marginBottom: 4 }}>
+                <div key={`${pathString}[${index}]`} className="copy-editor-array-item">
+                  <Mono className="copy-editor-array-path">
                     {pathString}[{index}]
                   </Mono>
                   <textarea
                     defaultValue={item}
-                    style={{
-                      width: '100%',
-                      minHeight: '40px',
-                      background: 'transparent',
-                      border: '1px solid var(--line2)',
-                      color: 'var(--text)',
-                      fontFamily: 'var(--serif)',
-                      fontSize: 13,
-                      fontStyle: 'italic',
-                      padding: '6px',
-                      outline: 'none',
-                      resize: 'vertical'
-                    }}
-                    onFocus={(e) => e.target.style.borderColor = 'var(--soft)'}
-                    onBlur={(e) => e.target.style.borderColor = 'var(--line2)'}
+                    className="copy-editor-textarea array"
                   />
                 </div>
               ))}
@@ -109,27 +72,17 @@ const CopyEditor = ({ go }) => {
       if (filteredEntries.length === 0) return null;
 
       return (
-        <div key={pathString} style={{ marginBottom: 16 }}>
+        <div key={pathString} className="copy-editor-node">
           <button
             onClick={() => toggleSection(pathString)}
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontFamily: 'var(--mono)',
-              fontSize: 12,
-              color: 'var(--white)',
-              padding: '8px 0',
-              textAlign: 'left',
-              width: '100%'
-            }}
+            className="copy-editor-toggle"
           >
-            <Mono style={{ color: expandedSections.has(pathString) ? 'var(--soft)' : 'var(--dim)' }}>
+            <Mono className={`copy-editor-toggle-label${expandedSections.has(pathString) ? ' expanded' : ''}`}>
               {expandedSections.has(pathString) ? '▼' : '▶'} {key}
             </Mono>
           </button>
           {expandedSections.has(pathString) && (
-            <div style={{ marginLeft: 20, marginTop: 8 }}>
+            <div className="copy-editor-children">
               {filteredEntries.map(([k, v]) => renderValue(k, v, currentPath))}
             </div>
           )}
@@ -238,45 +191,33 @@ const CopyEditor = ({ go }) => {
 
   return (
     <Screen>
-      <div className="fu d1" style={{ marginBottom: 24 }}>
+      <div className="fu d1 copy-editor-header">
         <Mono>Copy Editor</Mono>
         <h2 className="onboarding-h2">
           Edit All Copy Strings
         </h2>
-        <p style={{ fontFamily: "var(--serif)", fontSize: 14, color: "var(--mid)", fontStyle: "italic", lineHeight: 1.6 }}>
+        <p className="copy-editor-description">
           Update text strings for localization. Changes will be saved directly to copy.js when supported, or copied to clipboard for manual updates.
         </p>
       </div>
 
-      <div className="fu d2" style={{ marginBottom: 20 }}>
+      <div className="fu d2 copy-editor-search-wrap">
         <input
           type="text"
           placeholder="Search copy strings..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            width: '100%',
-            background: 'var(--bg1)',
-            border: '1px solid var(--line)',
-            color: 'var(--text)',
-            fontFamily: 'var(--serif)',
-            fontSize: 16,
-            fontStyle: 'italic',
-            padding: '12px 14px',
-            outline: 'none'
-          }}
-          onFocus={(e) => e.target.style.borderColor = 'var(--soft)'}
-          onBlur={(e) => e.target.style.borderColor = 'var(--line)'}
+          className="copy-editor-search"
         />
       </div>
 
-      <div className="fu d3" style={{ flex: 1, overflowY: 'auto', marginBottom: 20 }}>
+      <div className="fu d3 copy-editor-scroll">
         {Object.entries(copy).map(([key, value]) => renderValue(key, value))}
       </div>
 
-      <div className="fu d4" style={{ display: 'flex', gap: 12 }}>
-        <Btn onClick={exportCopy} style={{ flex: 1 }}>Save Changes</Btn>
-        <Btn ghost onClick={() => go('home')} style={{ flex: 1 }}>Back to App</Btn>
+      <div className="fu d4 copy-editor-actions">
+        <Btn onClick={exportCopy} className="copy-editor-action-btn">Save Changes</Btn>
+        <Btn ghost onClick={() => go('home')} className="copy-editor-action-btn">Back to App</Btn>
       </div>
     </Screen>
   );

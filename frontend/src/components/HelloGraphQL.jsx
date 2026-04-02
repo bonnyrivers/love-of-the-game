@@ -9,7 +9,6 @@ const HELLO_QUERY = gql`
 
 export default function HelloGraphQL() {
   const { data, loading, error } = useQuery(HELLO_QUERY);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-  return <div>GraphQL says: {data.hello}</div>;
+  console.log("GraphQL query result:", { data, loading, error });
+  return <></>;
 }

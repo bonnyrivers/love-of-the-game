@@ -135,6 +135,45 @@ export const G = () => (
       padding: 14px 16px;
       line-height: 1.3;
     }
+
+    /* Shared subtitle styles */
+    .subtitle-sm {
+      font-family: var(--serif);
+      font-size: 14px;
+      color: var(--mid);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .subtitle-sm.mb-24 { margin-bottom: 24px; }
+    .subtitle-sm.mb-18 { margin-bottom: 18px; }
+    .subtitle-sm.mb-6 { margin-bottom: 6px; }
+
+    .subtitle-md {
+      font-family: var(--serif);
+      font-size: 15px;
+      color: var(--mid);
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    .subtitle-md.mb-30 { margin-bottom: 30px; }
+
+    /* Shared label styles */
+    .field-label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 8px;
+      color: var(--dim);
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+
+    /* Utility spacers */
+    .spacer-sm { height: 16px; }
+    .spacer-md { height: 20px; }
+    .spacer-lg { height: 26px; }
+    .spacer-xl { height: 28px; }
   `}</style>
 );
 

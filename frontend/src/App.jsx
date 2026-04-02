@@ -17,6 +17,7 @@ import CopyEditor from "./components/CopyEditor.jsx";
 import Nav from "./components/Nav.jsx";
 import G from "./styles.jsx";
 import HelloGraphQL from "./components/HelloGraphQL.jsx";
+import { fetchProfileByEmail } from "./services/profileApi.js";
 
 const MAIN = ["home", "matches", "notes", "profile"];
 
@@ -25,6 +26,18 @@ export default function App() {
   const [user, setUser] = useState({});
   const go = (s) => setScreen(s);
   const set = (d) => setUser((p) => ({ ...p, ...d }));
+
+  // Auto-load returning user's profile
+  useEffect(() => {
+    const email = localStorage.getItem("pp_email");
+    if (!email) return;
+    fetchProfileByEmail(email).then((profile) => {
+      if (profile) {
+        setUser(profile);
+        setScreen("home");
+      }
+    });
+  }, []);
 
   // Hidden keyboard shortcut to access copy editor
   useEffect(() => {
@@ -106,17 +119,6 @@ export default function App() {
           {render()}
         </div>
         {MAIN.includes(screen) && <Nav active={screen} go={go} />}
-
-        {/* Hidden copy editor access - subtle button in bottom right */}
-        {screen === 'home' && (
-          <button
-            onClick={() => go('copy-editor')}
-            className="app-copy-editor-button"
-            title="Copy Editor (Ctrl+Shift+C)"
-          >
-            ✏️
-          </button>
-        )}
       </div>
       <HelloGraphQL />
     </>

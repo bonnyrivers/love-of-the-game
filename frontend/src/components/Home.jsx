@@ -21,15 +21,15 @@ class Home extends React.Component {
         {/* Standing — private, no public stat */}
         <div className="fu d2 home-standing-card">
           <div>
-            <Mono style={{ display:"block",marginBottom:4 }}>{copy.components.home.standing.label}</Mono>
+            <Mono className="home-standing-label">{copy.components.home.standing.label}</Mono>
             <span className="home-standing-value">{copy.components.home.standing.value}</span>
           </div>
-          <Mono style={{ color:"var(--soft)",fontSize:8 }}>{copy.components.home.standing.bonusActive}</Mono>
+          <Mono className="home-standing-bonus">{copy.components.home.standing.bonusActive}</Mono>
         </div>
 
         {/* Confirmed date card */}
         <div className="fu d2 home-confirmed-date-section">
-          <Mono style={{ display:"block",marginBottom:10 }}>{copy.components.home.confirmedDate.label}</Mono>
+          <Mono className="home-confirmed-label">{copy.components.home.confirmedDate.label}</Mono>
           <div className="home-confirmed-date-card">
             <div className="home-date-header">
               <div>
@@ -42,7 +42,7 @@ class Home extends React.Component {
               </div>
             </div>
             <Rule style={{ marginBottom:12 }}/>
-            <Mono style={{ display:"block",marginBottom:6 }}>{copy.components.home.confirmedDate.venueLabel}</Mono>
+            <Mono className="home-venue-label">{copy.components.home.confirmedDate.venueLabel}</Mono>
             <p className="home-venue-info">Dimes · Essex St, LES</p>
             <Rule style={{ marginBottom:12 }}/>
             {/* Why you matched */}
@@ -53,7 +53,7 @@ class Home extends React.Component {
               </p>
             </div>
             <div className="home-schedule-indicator">
-              <Mono style={{ fontSize:8 }}>{copy.components.home.confirmedDate.scheduleOverlapIndicator.replace('{time}', '18').replace('{count}', '10')}</Mono>
+              <Mono className="home-schedule-text">{copy.components.home.confirmedDate.scheduleOverlapIndicator.replace('{time}', '18').replace('{count}', '10')}</Mono>
               <div className="home-pulse-dot"/>
             </div>
           </div>
@@ -77,7 +77,7 @@ class Home extends React.Component {
           {["Amara, 28 · 1.1 mi","Lily, 31 · 3.8 mi"].map((n,i)=>(
             <div key={i} onClick={()=>go("matches")} className="home-pending-item">
               <span className="home-pending-name">{n}</span>
-              <Mono style={{ fontSize:8 }}>{copy.components.home.waiting.respond}</Mono>
+              <Mono className="home-pending-respond">{copy.components.home.waiting.respond}</Mono>
             </div>
           ))}
         </div>

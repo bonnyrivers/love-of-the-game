@@ -1,5 +1,6 @@
 import React from 'react';
 import { Screen, Mono, Rule, Btn } from "./UI";
+import "./Notes.css";
 
 // ══════════════════════════════════════════════════════════════════════════════
 // 12. FIELD NOTES
@@ -40,20 +41,24 @@ class Notes extends React.Component {
     const { go } = this.props;
 
     const TabBtn = ({ id, label }) => (
-      <button onClick={()=>this.setView(id)} style={{
-        background:"transparent",border:"none",cursor:"pointer",
-        fontFamily:"var(--mono)",fontSize:8,letterSpacing:"0.14em",textTransform:"uppercase",
-        color:view===id?"var(--white)":"var(--dim)",
-        borderBottom:`1px solid ${view===id?"var(--soft)":"transparent"}`,
-        padding:"8px 0",transition:"all .14s"
-      }}>{label}</button>
+      <button
+        onClick={() => this.setView(id)}
+        className={`notes-tab-btn${view === id ? " active" : ""}`}
+      >
+        {label}
+      </button>
     );
 
     if(entry!==null) {
       const e = ENTRIES[entry];
       return (
         <Screen style={{ paddingBottom:90 }}>
-          <button onClick={()=>this.setEntry(null)} style={{ background:"none",border:"none",cursor:"pointer",fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em",marginBottom:26,padding:0,textAlign:"left" }}>← back</button>
+          <button
+            onClick={() => this.setEntry(null)}
+            className="notes-back-btn"
+          >
+            ← back
+          </button>
           <div className="fu d1">
             <Mono style={{ display:"block",marginBottom:8 }}>{e.date} · {e.venue}</Mono>
             <h2 style={{ fontFamily:"var(--serif)",fontSize:44,fontStyle:"italic",fontWeight:400,color:"var(--white)",lineHeight:1,marginBottom:14 }}>{e.name}</h2>
@@ -93,18 +98,20 @@ class Notes extends React.Component {
           <div>
             {ENTRIES.map((e,i)=>(
               <div key={i} className="fu" style={{ animationDelay:`${i*.07}s`,marginBottom:9 }}>
-                <div onClick={()=>this.setEntry(i)} style={{
-                  border:"1px solid var(--line)",padding:"15px 14px",cursor:"pointer",
-                  background:"var(--bg1)",display:"flex",justifyContent:"space-between",alignItems:"center"
-                }}>
+                <div
+                  onClick={() => this.setEntry(i)}
+                  className="notes-entry"
+                >
                   <div>
-                    <p style={{ fontFamily:"var(--serif)",fontSize:22,fontStyle:"italic",color:"var(--white)",marginBottom:5 }}>{e.name}</p>
-                    <Mono style={{ display:"block",marginBottom:6 }}>{e.date} · {e.venue}</Mono>
-                    <div style={{ display:"flex",gap:6,flexWrap:"wrap" }}>
-                      {e.vibe.map(v=><Mono key={v} style={{ fontSize:7,color:"var(--soft)" }}>{v}</Mono>)}
+                    <p className="notes-entry-name">{e.name}</p>
+                    <Mono className="notes-entry-venue">{e.date} · {e.venue}</Mono>
+                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                      {e.vibe.map(v => (
+                        <Mono key={v} className="notes-entry-vibe">{v}</Mono>
+                      ))}
                     </div>
                   </div>
-                  <p style={{ fontFamily:"var(--serif)",fontSize:12,fontStyle:"italic",color:"var(--dim)",maxWidth:120,textAlign:"right",lineHeight:1.5 }}>{e.great.slice(0,38)}…</p>
+                  <p className="notes-entry-great">{e.great.slice(0, 38)}…</p>
                 </div>
               </div>
             ))}
@@ -146,9 +153,9 @@ class Notes extends React.Component {
               Based on your {ENTRIES.length} entries, here's what we're noticing — to help you make better dates.
             </p>
             {PATTERNS.map((p,i)=>(
-              <div key={i} style={{ borderLeft:"1px solid var(--line2)",paddingLeft:14,marginBottom:24 }}>
-                <Mono style={{ display:"block",marginBottom:8 }}>{p.label}</Mono>
-                <p style={{ fontFamily:"var(--serif)",fontSize:19,fontStyle:"italic",color:"var(--white)",lineHeight:1.4 }}>{p.insight}</p>
+              <div key={i} className="notes-pattern">
+                <Mono style={{ display: "block", marginBottom: 8 }}>{p.label}</Mono>
+                <p style={{ fontFamily: "var(--serif)", fontSize: 19, fontStyle: "italic", color: "var(--white)", lineHeight: 1.4 }}>{p.insight}</p>
               </div>
             ))}
             <Rule style={{ margin:"24px 0 18px" }}/>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Screen, Mono, Btn, Rule } from "./UI.jsx";
 import copy from '../copy.js';
+import './Matches.css';
 
 // ══════════════════════════════════════════════════════════════════════════════
 // MATCHES — no % scores, "why matched" bubble, availability request
@@ -37,77 +38,81 @@ class Matches extends React.Component {
     if(sel!==null) {
       const m = MATCHES[sel];
       return (
-        <Screen style={{ paddingBottom:90 }}>
-          <button onClick={()=>this.setSel(null)} style={{ background:"none",border:"none",cursor:"pointer",fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em",marginBottom:24,padding:0,textAlign:"left" }}>{copy.components.matches.matchCard.back}</button>
-          <div className="fu d1">
-            <Mono style={{ display:"block",marginBottom:7 }}>{m.dist} · {m.sign} · {m.hd}</Mono>
-            <h2 style={{ fontFamily:"var(--serif)",fontSize:50,fontStyle:"italic",fontWeight:400,color:"var(--white)",lineHeight:1,marginBottom:4 }}>{m.name}</h2>
+        <Screen className="matches-screen">
+          <button
+            onClick={() => this.setSel(null)}
+            className="matches-back-btn"
+          >
+            {copy.components.matches.matchCard.back}
+          </button>
+          <div className="fu d1 matches-card-header">
+            <Mono className="matches-meta">{m.dist} · {m.sign} · {m.hd}</Mono>
+            <h2 className="matches-card-title">{m.name}</h2>
             <Mono>{copy.components.matches.matchCard.yearsOld.replace('{age}', m.age)}</Mono>
           </div>
 
           {/* B&W photos — up to 3 */}
-          <div className="fu d2" style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,margin:"20px 0" }}>
+          <div className="fu d2 matches-photos-grid">
             {[0,1,2].map(i=>(
-              <div key={i} style={ {
-                border:"1px solid var(--line)",background:"var(--bg1)",
-                height: i===0?220:140,
-                gridColumn: i===0?"1 / span 2":"auto",
-                display:"flex",alignItems:"center",justifyContent:"center"
-              }}>
-                <span style={{ color:"var(--line2)",fontSize:22 }}>◯</span>
+              <div key={i} className={`matches-photo-slot${i===0 ? ' first' : ''}`}>
+                <span className="matches-photo-placeholder">◯</span>
               </div>
             ))}
           </div>
 
           {/* Why matched — no percentages */}
-          <div className="fu d3" style={{ background:"var(--bg2)",border:"1px solid var(--line)",padding:"16px",marginBottom:18 }}>
-            <Mono style={{ display:"block",marginBottom:8 }}>{copy.components.matches.matchDetail.whyMatched}</Mono>
-            <p style={{ fontFamily:"var(--serif)",fontSize:15,fontStyle:"italic",color:"var(--text)",lineHeight:1.65 }}>{m.why}</p>
+          <div className="fu d3 matches-why-box">
+            <Mono className="matches-why-label">{copy.components.matches.matchDetail.whyMatched}</Mono>
+            <p className="matches-why-text">{m.why}</p>
           </div>
 
           {/* Schedule overlap — the one stat */}
-          <div className="fu d3" style={{ border:"1px solid var(--line)",padding:"14px 16px",background:"var(--bg1)",marginBottom:18 }}>
-            <div style={{ display:"flex",justifyContent:"space-between",marginBottom:8 }}>
+          <div className="fu d3 matches-schedule-box">
+            <div className="matches-schedule-header">
               <Mono>{copy.components.matches.matchDetail.scheduleOverlap}</Mono>
-              <Mono style={{ color:"var(--white)" }}>{m.scheduleOverlap}%</Mono>
+              <Mono className="matches-overlap-value">{m.scheduleOverlap}%</Mono>
             </div>
-            <div style={{ height:1,background:"var(--line)" }}>
-              <div style={{ height:1,background:"var(--soft)",width:`${m.scheduleOverlap}%`,transition:"width 1s ease" }}/>
+            <div className="matches-progress-bar">
+              <div className="matches-progress-fill" style={{ width:`${m.scheduleOverlap}%` }}/>
             </div>
-            <div style={{ display:"flex",gap:8,marginTop:12,flexWrap:"wrap" }}>
+            <div className="matches-slots">
               {m.slots.map(s=>(
-                <span key={s} style={{ border:"1px solid var(--line2)",fontFamily:"var(--mono)",fontSize:8,letterSpacing:"0.1em",color:s.includes("★")?"var(--white)":"var(--dim)",padding:"6px 11px" }}>{s}</span>
+                <span key={s} className={`matches-slot-tag${s.includes("★") ? ' available' : ' unavailable'}`}>{s}</span>
               ))}
             </div>
           </div>
 
           {/* Availability request */}
-          <div className="fu d4" style={{ marginBottom:20 }}>
-            <button onClick={()=>this.setReqOpen(!this.state.reqOpen)} style={{ background:"none",border:"none",cursor:"pointer",fontFamily:"var(--mono)",fontSize:8,color:"var(--dim)",letterSpacing:"0.1em",padding:0,textDecoration:"underline" }}>
+          <div className="fu d4 matches-request-wrap">
+            <button
+              onClick={() => this.setReqOpen(!this.state.reqOpen)}
+              className="matches-request-btn"
+            >
               {reqOpen?copy.components.matches.matchDetail.cancelRequest:copy.components.matches.matchDetail.requestAvail}
             </button>
             {reqOpen&&(
-              <div className="fi" style={{ marginTop:12 }}>
-                <p style={{ fontFamily:"var(--serif)",fontSize:14,fontStyle:"italic",color:"var(--mid)",marginBottom:10,lineHeight:1.5 }}>
+              <div className="fi matches-request-panel">
+                <p className="matches-request-message">
                   {copy.components.matches.matchDetail.requestMessage.replace('{name}', m.name)}
                 </p>
-                <textarea value={reqMsg} onChange={e=>this.setReqMsg(e.target.value)} rows={2}
+                <textarea
+                  className="matches-request-textarea"
+                  value={reqMsg}
+                  onChange={e => this.setReqMsg(e.target.value)}
+                  rows={2}
                   placeholder={copy.components.matches.matchDetail.requestPlaceholder}
-                  style={{ width:"100%",background:"var(--bg1)",border:"1px solid var(--line)",color:"var(--text)",fontFamily:"var(--serif)",fontSize:15,fontStyle:"italic",padding:"10px 12px",outline:"none",resize:"none",lineHeight:1.5,marginBottom:10 }}
-                  onFocus={e=>e.target.style.borderColor="var(--soft)"}
-                  onBlur={e=>e.target.style.borderColor="var(--line)"}
                 />
-                <Btn small style={{ width:"auto" }} disabled={!reqMsg.trim()} onClick={()=>{ this.setReqOpen(false); this.setReqMsg(""); }}>{copy.components.matches.matchDetail.sendRequest}</Btn>
+                <Btn small className="matches-send-btn" disabled={!reqMsg.trim()} onClick={() => { this.setReqOpen(false); this.setReqMsg(""); }}>{copy.components.matches.matchDetail.sendRequest}</Btn>
               </div>
             )}
           </div>
 
-          <Rule style={{ marginBottom:18 }}/>
+          <Rule className="matches-rule"/>
           {m.status==="confirmed"
-            ? <Mono style={{ textAlign:"center",display:"block",padding:"12px 0",color:"var(--soft)" }}>{copy.components.matches.matchDetail.dateConfirmed}</Mono>
-            : <div style={{ display:"flex",flexDirection:"column",gap:10 }}>
-                <Btn onClick={()=>this.setSel(null)}>{copy.components.matches.matchDetail.acceptMatch}</Btn>
-                <Btn ghost onClick={()=>this.setSel(null)}>{copy.components.matches.matchDetail.passMatch}</Btn>
+            ? <Mono className="matches-confirmed-message">{copy.components.matches.matchDetail.dateConfirmed}</Mono>
+            : <div className="matches-actions">
+                <Btn onClick={() => this.setSel(null)}>{copy.components.matches.matchDetail.acceptMatch}</Btn>
+                <Btn ghost onClick={() => this.setSel(null)}>{copy.components.matches.matchDetail.passMatch}</Btn>
               </div>
           }
         </Screen>
@@ -115,32 +120,33 @@ class Matches extends React.Component {
     }
 
     return (
-      <Screen style={{ paddingBottom:90 }}>
-        <div className="fu d1" style={{ marginBottom:26 }}>
+      <Screen className="matches-screen">
+        <div className="fu d1 matches-list-header">
           <Mono>{copy.components.matches.header.sectionLabel}</Mono>
-          <h2 style={{ margin:"12px 0 6px" }}>{copy.components.matches.header.title}</h2>
-          <p style={{ fontFamily:"var(--serif)",fontSize:14,color:"var(--mid)",fontStyle:"italic" }}>{copy.components.matches.header.subtitle}</p>
+          <h2 className="matches-list-title">{copy.components.matches.header.title}</h2>
+          <p className="subtitle-sm">{copy.components.matches.header.subtitle}</p>
         </div>
-        {MATCHES.map((m,i)=>(
-          <div key={i} className="fu" style={{ animationDelay:`${i*.07+.08}s`,marginBottom:8 }}>
-            <div onClick={()=>this.setSel(i)} style={{
-              border:`1px solid ${m.status==="confirmed"?"var(--soft)":"var(--line)"}`,
-              padding:"16px 14px",cursor:"pointer",background:"var(--bg1)",
-              display:"flex",justifyContent:"space-between",alignItems:"center"
-            }}>
-              <div>
-                <p style={{ fontFamily:"var(--serif)",fontSize:22,fontStyle:"italic",color:"var(--white)",marginBottom:5 }}>{m.name}, {m.age}</p>
-                <div style={{ display:"flex",gap:10,alignItems:"center" }}>
-                  <Mono>{m.dist}</Mono>
-                  {m.slots.some(s=>s.includes("★"))&&<Mono style={{ color:"var(--soft)",fontSize:8 }}>{copy.components.matches.matchDetail.premiumSlot}</Mono>}
+        <div className="matches-list">
+          {MATCHES.map((m,i)=>(
+            <div key={i} className="fu matches-list-anim" style={{ animationDelay:`${i*.07+.08}s` }}>
+              <div
+                onClick={() => this.setSel(i)}
+                className="matches-list-item"
+                style={{ borderColor: m.status==="confirmed" ? "var(--soft)" : "var(--line)" }}
+              >
+                <div>
+                  <p className="matches-list-name">{m.name}, {m.age}</p>
+                  <div className="matches-list-meta-row">
+                    <Mono>{m.dist}</Mono>
+                    {m.slots.some(s=>s.includes("★"))&&<Mono className="matches-premium-slot">{copy.components.matches.matchDetail.premiumSlot}</Mono>}
+                  </div>
+                  {m.status==="confirmed" && <span className="matches-list-status">{copy.components.matches.matchCard.confirmed}</span>}
                 </div>
+                {m.status!=="confirmed" && <Mono className="matches-list-view-more">{copy.components.matches.matchCard.viewMore}</Mono>}
               </div>
-              <Mono style={{ color:m.status==="confirmed"?"var(--soft)":"var(--dim)" }}>
-                {m.status==="confirmed"?copy.components.matches.matchCard.confirmed:copy.components.matches.matchCard.viewMore}
-              </Mono>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </Screen>
     );
   }

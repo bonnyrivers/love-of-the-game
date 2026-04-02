@@ -25,17 +25,17 @@ class CheckIn extends React.Component {
     return (
       <Screen className="check-in-screen">
         <div className="fu d1 check-in-header">
-          <Mono style={{ display:"block",marginBottom:14 }}>{copy.components.checkIn.header.replace('{name}', 'Selin').replace('{venue}', 'Dimes')}</Mono>
+          <Mono className="check-in-header-meta">{copy.components.checkIn.header.replace('{name}', 'Selin').replace('{venue}', 'Dimes')}</Mono>
           <h2 className="onboarding-h2">{copy.components.checkIn.title}</h2>
         </div>
 
         {status==="idle"&&(
           <div className="fu d2">
             <div className="check-in-status-box">
-              <Mono style={{ lineHeight:1.9,display:"block" }}>{copy.components.checkIn.status.idle.pulse}<br/><span style={{ color:"var(--mid)" }}>{copy.components.checkIn.status.idle.privacy}</span></Mono>
+              <Mono className="check-in-status-text">{copy.components.checkIn.status.idle.pulse}<br/><span className="check-in-status-sub">{copy.components.checkIn.status.idle.privacy}</span></Mono>
             </div>
             <Btn onClick={()=>{ this.setStatus("checking"); setTimeout(()=>this.setStatus("unconfirmed"),2000); }}>{copy.components.checkIn.status.idle.here}</Btn>
-            <Btn ghost style={{ marginTop:10 }} onClick={()=>this.setStatus("no-show")}>{copy.components.checkIn.status.idle.cantMakeIt}</Btn>
+            <Btn ghost className="check-in-btn-gap" onClick={()=>this.setStatus("no-show")}>{copy.components.checkIn.status.idle.cantMakeIt}</Btn>
           </div>
         )}
 
@@ -58,7 +58,7 @@ class CheckIn extends React.Component {
             {[[copy.components.checkIn.status.unconfirmed.yes,"yes"],[copy.components.checkIn.status.unconfirmed.no,"no"]].map(([l,v])=>(
               <button key={v} onClick={()=>this.setSelf(v)} className={`option-button block ${self===v ? 'selected' : ''}`}>{l}</button>
             ))}
-            {self&&<Btn style={{ marginTop:8 }} onClick={()=>this.props.go(self==="yes"?"post-date":"home")}>
+            {self&&<Btn className="check-in-btn-gap-sm" onClick={()=>this.props.go(self==="yes"?"post-date":"home")}>
               {self==="yes"?copy.components.checkIn.status.unconfirmed.fieldNote:copy.components.checkIn.status.unconfirmed.submit}
             </Btn>}
           </div>
@@ -71,7 +71,7 @@ class CheckIn extends React.Component {
               <p className="onboarding-p-subtitle">{copy.components.checkIn.status.noShow.message}</p>
             </div>
             <Btn onClick={()=>this.props.go("home")}>{copy.components.checkIn.status.noShow.submit}</Btn>
-            <Btn ghost style={{ marginTop:10 }} onClick={()=>this.props.go("home")}>{copy.components.checkIn.status.noShow.justDidntGo}</Btn>
+            <Btn ghost className="check-in-btn-gap" onClick={()=>this.props.go("home")}>{copy.components.checkIn.status.noShow.justDidntGo}</Btn>
           </div>
         )}
       </Screen>

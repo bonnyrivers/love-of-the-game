@@ -1,6 +1,7 @@
 import React from 'react';
 import { Screen, Mono, Btn } from "../UI.jsx";
 import copy from '../../copy.js';
+import { upsertOnboardingProfile } from "../../services/profileApi.js";
 import './ObAvail.css';
 // ══════════════════════════════════════════════════════════════════════════════
 // AVAILABILITY GRID
@@ -22,6 +23,19 @@ class ObAvail extends React.Component {
     this.setState((prevState) => ({
       avail: { ...prevState.avail, [k]: !prevState.avail[k] }
     }));
+  };
+
+  handleComplete = async () => {
+    const { avail } = this.state;
+    this.props.set({ avail });
+
+    try {
+      await upsertOnboardingProfile(this.props.state, avail);
+    } catch (error) {
+      console.error("Failed to save onboarding profile:", error);
+    }
+
+    this.props.go("home");
   };
 
   render() {
@@ -63,7 +77,7 @@ class ObAvail extends React.Component {
             {copy.components.onboarding.obAvail.notes.map(note => <>{note}<br/></>)}
           </p>
         </div>
-        <Btn onClick={()=>{ this.props.set({avail}); this.props.go("home"); }} disabled={count<3}>
+        <Btn onClick={this.handleComplete} disabled={count<3}>
           {count<3?copy.components.onboarding.obAvail.pickMore.replace('{count}', 3-count).replace('{plural}', 3-count===1?'':'s') : copy.components.onboarding.obAvail.allSet}
         </Btn>
       </Screen>
