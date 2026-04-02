@@ -154,8 +154,14 @@ GRAPHENE = {
 
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
-    default='http://localhost:5173,http://127.0.0.1:5173',
+    default='http://localhost:5173,http://127.0.0.1:5173,https://projectpilot-web.herokuapp.com',
     cast=lambda value: [origin.strip() for origin in value.split(',') if origin.strip()],
+)
+
+CORS_ALLOWED_ORIGIN_REGEXES = config(
+    'CORS_ALLOWED_ORIGIN_REGEXES',
+    default=r'^https://.*\.herokuapp\.com$',
+    cast=lambda value: [pattern.strip() for pattern in value.split(',') if pattern.strip()],
 )
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

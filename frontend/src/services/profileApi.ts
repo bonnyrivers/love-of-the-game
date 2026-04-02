@@ -1,5 +1,5 @@
 // @ts-nocheck
-const GRAPHQL_URL = "http://127.0.0.1:8000/graphql/";
+import { GRAPHQL_URL } from "../graphqlUrl.ts";
 
 const GENDER_MAP = {
   Man: "M",

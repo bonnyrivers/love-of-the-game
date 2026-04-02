@@ -1,4 +1,6 @@
 // @ts-nocheck
+import { GRAPHQL_URL } from "./graphqlUrl.ts";
+
 const copy = {};
 
 let loaded = false;
@@ -6,7 +8,7 @@ let loaded = false;
 export async function loadCopy() {
   if (loaded) return copy;
 
-  const response = await fetch("http://127.0.0.1:8000/graphql/", {
+  const response = await fetch(GRAPHQL_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
