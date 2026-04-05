@@ -160,6 +160,18 @@ export const G = () => (
 
     .subtitle-md.mb-30 { margin-bottom: 30px; }
 
+    /* Shared text utilities */
+    .serif-italic {
+      font-family: var(--serif);
+      font-style: italic;
+    }
+
+    .mono-uppercase {
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
     /* Shared label styles */
     .field-label {
       display: block;

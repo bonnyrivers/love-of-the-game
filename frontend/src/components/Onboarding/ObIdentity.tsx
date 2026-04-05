@@ -8,7 +8,7 @@ import copy from '../../copy.ts';
 import './ObIdentity.css';
 
 // ══════════════════════════════════════════════════════════════════════════════
-class ObIdentity extends React.Component {
+class ObIdentity extends React.Component<any> {
   constructor(props) {
     super(props);
     this.state = {

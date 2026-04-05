@@ -8,7 +8,7 @@ import copy from '../../copy.ts';
 import './ObLifestyle.css';
 
 // ══════════════════════════════════════════════════════════════════════════════
-class ObLifestyle extends React.Component {
+class ObLifestyle extends React.Component<any> {
   constructor(props) {
     super(props);
     this.state = {

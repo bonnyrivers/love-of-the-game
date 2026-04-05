@@ -7,7 +7,7 @@ import './CheckIn.css';
 // ══════════════════════════════════════════════════════════════════════════════
 // CHECK-IN
 // ══════════════════════════════════════════════════════════════════════════════
-class CheckIn extends React.Component {
+class CheckIn extends React.Component<any> {
   constructor(props) {
     super(props);
     this.state = {

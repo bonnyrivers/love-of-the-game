@@ -7,7 +7,7 @@ import './Lockout.css';
 // ══════════════════════════════════════════════════════════════════════════════
 // 14. LOCKOUT
 
-class Lockout extends React.Component {
+class Lockout extends React.Component<any> {
   render() {
     const { go } = this.props;
     return (

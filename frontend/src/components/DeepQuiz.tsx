@@ -34,7 +34,7 @@ const DEEP_QS = [
   },
 ];
 
-class DeepQuiz extends React.Component {
+class DeepQuiz extends React.Component<any> {
   constructor(props) {
     super(props);
     this.state = {

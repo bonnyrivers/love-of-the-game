@@ -11,7 +11,7 @@ const DAYS  = ["M","T","W","Th","F","Sa","Su"];
 const SLOTS = ["Morn","Aftn","Eve","Night"];
 const isPremium = (d,s) => ["Sa","Su","F"].includes(d)&&["Eve","Night"].includes(s);
 
-class ObAvail extends React.Component {
+class ObAvail extends React.Component<any> {
   constructor(props) {
     super(props);
     this.state = {

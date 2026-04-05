@@ -1,0 +1,240 @@
+.field-notes-screen {
+  padding-bottom: 90px;
+}
+
+.field-notes-tab-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  border-bottom: 1px solid transparent;
+  padding: 8px 0;
+  transition: all 0.14s;
+}
+
+.field-notes-tab-btn.active {
+  color: var(--white);
+  border-bottom: 1px solid var(--soft);
+}
+
+.field-notes-back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+  margin-bottom: 26px;
+  padding: 0;
+  text-align: left;
+}
+
+.field-notes-entry-meta {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.field-notes-entry-name {
+  font-size: 44px;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.field-notes-vibe-list {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.field-notes-vibe-pill {
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--soft);
+  letter-spacing: 0.1em;
+  padding: 5px 10px;
+}
+
+.field-notes-detail-block {
+  margin-bottom: 22px;
+}
+
+.field-notes-meta-label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.field-notes-detail-text {
+  font-size: 17px;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.field-notes-free-block {
+  border-left: 1px solid var(--line);
+  padding-left: 14px;
+  margin-top: 6px;
+}
+
+.field-notes-free-text {
+  font-size: 16px;
+  color: var(--mid);
+  line-height: 1.7;
+}
+
+.field-notes-header {
+  margin-bottom: 22px;
+}
+
+.field-notes-title {
+  margin: 12px 0 16px;
+}
+
+.field-notes-tabs {
+  display: flex;
+  gap: 24px;
+}
+
+.field-notes-rule {
+  margin-bottom: 18px;
+}
+
+.field-notes-entry-wrap {
+  margin-bottom: 9px;
+}
+
+.field-notes-entry-card {
+  border: 1px solid var(--line);
+  padding: 15px 14px;
+  cursor: pointer;
+  background: var(--bg1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field-notes-card-name {
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 5px;
+}
+
+.field-notes-entry-venue {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.field-notes-card-vibes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.field-notes-card-vibe {
+  font-size: 7px;
+  color: var(--soft);
+}
+
+.field-notes-card-great {
+  font-size: 12px;
+  color: var(--dim);
+  max-width: 120px;
+  text-align: right;
+  line-height: 1.5;
+}
+
+.field-notes-new-entry {
+  margin-top: 14px;
+}
+
+.field-notes-calendar-month {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.field-notes-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  margin-bottom: 22px;
+}
+
+.field-notes-calendar-day-label {
+  font-family: var(--mono);
+  font-size: 7px;
+  color: var(--dim);
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.field-notes-calendar-day {
+  height: 34px;
+  border: 1px solid var(--line);
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  gap: 3px;
+}
+
+.field-notes-calendar-day.has-entry {
+  border-color: var(--soft);
+  background: var(--bg2);
+  cursor: pointer;
+}
+
+.field-notes-calendar-day-number {
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--dim);
+}
+
+.field-notes-calendar-day.has-entry .field-notes-calendar-day-number {
+  color: var(--white);
+}
+
+.field-notes-calendar-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--soft);
+}
+
+.field-notes-patterns-intro {
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.field-notes-pattern-block {
+  border-left: 1px solid var(--line2);
+  padding-left: 14px;
+  margin-bottom: 24px;
+}
+
+.field-notes-pattern-insight {
+  font-size: 19px;
+  color: var(--white);
+  line-height: 1.4;
+}
+
+.field-notes-patterns-rule {
+  margin: 24px 0 18px;
+}
+
+.field-notes-patterns-privacy {
+  font-size: 12px;
+  color: var(--dim);
+  line-height: 1.7;
+}

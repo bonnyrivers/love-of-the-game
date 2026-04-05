@@ -16,7 +16,7 @@ const MATCHES = [
   { name:"Remi",   age:26, dist:"4.1 mi", sign:"Aquarius", hd:"Generator",  slots:["Fri Night ★","Sat Aftn ★"], scheduleOverlap:70,  why:"Both want a real relationship. Physical warmth as a shared love language. Same music and food interests.", status:"pending",   photos:[null,null] },
 ];
 
-class Matches extends React.Component {
+class Matches extends React.Component<any> {
   constructor(props) {
     super(props);
     this.state = {

@@ -9,7 +9,7 @@ import './PostDate.css';
 // ══════════════════════════════════════════════════════════════════════════════
 const VIBES = copy.components.postDate.step1.vibes;
 
-class PostDate extends React.Component {
+class PostDate extends React.Component<any> {
   constructor(props) {
     super(props);
     this.state = {

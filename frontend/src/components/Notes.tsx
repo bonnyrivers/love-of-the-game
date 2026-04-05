@@ -24,7 +24,7 @@ const PATTERNS = [
 
 const calDateNums = [4,11,18,25];
 
-class Notes extends React.Component {
+class Notes extends React.Component<any> {
   constructor(props) {
     super(props);
     this.state = {

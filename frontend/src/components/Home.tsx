@@ -7,7 +7,7 @@ import './Home.css';
 // ══════════════════════════════════════════════════════════════════════════════
 // HOME
 // ══════════════════════════════════════════════════════════════════════════════
-class Home extends React.Component {
+class Home extends React.Component<any> {
   render() {
     const { go, state } = this.props;
     return (

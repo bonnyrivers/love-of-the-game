@@ -7,7 +7,7 @@ import './ObName.css';
 // ══════════════════════════════════════════════════════════════════════════════
 // 2. NAME + AGE
 // ══════════════════════════════════════════════════════════════════════════════
-class ObName extends React.Component {
+class ObName extends React.Component<any> {
   constructor(props) {
     super(props);
     this.state = {

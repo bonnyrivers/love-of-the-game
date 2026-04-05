@@ -1,48 +1,54 @@
-// @ts-nocheck
 // ══════════════════════════════════════════════════════════════════════════════
 // ROOT
 // ══════════════════════════════════════════════════════════════════════════════
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import './App.css';
-import Splash from "./components/Splash.tsx";
-import { ObName, ObIdentity, ObQuiz, ObLifestyle, ObPhoto, ObAvail } from "./components/Onboarding/index.ts";
-import Home from "./components/Home.tsx";
-import Matches from "./components/Matches.tsx";
-import Notes from "./components/Notes.tsx";
-import Profile from "./components/Profile.tsx";
-import CheckIn from "./components/CheckIn.tsx";
-import PostDate from "./components/PostDate.tsx";
-import Lockout from "./components/Lockout.tsx";
-import DeepQuiz from "./components/DeepQuiz.tsx";
-import CopyEditor from "./components/CopyEditor.tsx";
-import Nav from "./components/Nav.tsx";
-import G from "./styles.tsx";
-import HelloGraphQL from "./components/HelloGraphQL.tsx";
-import { fetchProfileByEmail } from "./services/profileApi.ts";
+import Splash from './components/Splash.tsx';
+import {
+  ObName,
+  ObIdentity,
+  ObQuiz,
+  ObLifestyle,
+  ObPhoto,
+  ObAvail,
+} from './components/Onboarding/index.ts';
+import Home from './components/Home.tsx';
+import Matches from './components/Matches.tsx';
+import Notes from './components/Notes.tsx';
+import Profile from './components/Profile.tsx';
+import CheckIn from './components/CheckIn.tsx';
+import PostDate from './components/PostDate.tsx';
+import Lockout from './components/Lockout.tsx';
+import DeepQuiz from './components/DeepQuiz.tsx';
+import CopyEditor from './components/CopyEditor.tsx';
+import Nav from './components/Nav.tsx';
+import G from './styles.tsx';
+import HelloGraphQL from './graphql/HelloGraphQL.tsx';
+import { fetchProfileByEmail } from './services/profileApi.ts';
 
-const MAIN = ["home", "matches", "notes", "profile"];
+const MAIN = ['home', 'matches', 'notes', 'profile'];
 
 export default function App() {
-  const [screen, setScreen] = useState("splash");
-  const [user, setUser] = useState({});
-  const go = (s) => setScreen(s);
-  const set = (d) => setUser((p) => ({ ...p, ...d }));
+  const [screen, setScreen] = useState<string>('splash');
+  const [user, setUser] = useState<Record<string, any>>({});
+  const go = (s: string) => setScreen(s);
+  const set = (d: Partial<Record<string, any>>) => setUser((p) => ({ ...p, ...d }));
 
   // Auto-load returning user's profile
   useEffect(() => {
-    const email = localStorage.getItem("pp_email");
+    const email: string | null = localStorage.getItem('pp_email');
     if (!email) return;
     fetchProfileByEmail(email).then((profile) => {
       if (profile) {
         setUser(profile);
-        setScreen("home");
+        setScreen('home');
       }
     });
   }, []);
 
   // Hidden keyboard shortcut to access copy editor
   useEffect(() => {
-    const handleKeyPress = (e) => {
+    const handleKeyPress = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.shiftKey && e.key === 'C') {
         e.preventDefault();
         go('copy-editor');
@@ -52,58 +58,39 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
-  const S = {
-    splash: "splash",
-    "ob-name": "ob-name",
-    "ob-identity": "ob-identity",
-    "ob-quiz": "ob-quiz",
-    "ob-lifestyle": "ob-lifestyle",
-    "ob-photo": "ob-photo",
-    "ob-avail": "ob-avail",
-    home: "home",
-    matches: "matches",
-    notes: "notes",
-    profile: "profile",
-    checkin: "checkin",
-    "post-date": "post-date",
-    lockout: "lockout",
-    "deep-quiz": "deep-quiz",
-    "copy-editor": "copy-editor",
-  };
-
   const render = () => {
     switch (screen) {
-      case "splash":
+      case 'splash':
         return <Splash go={go} />;
-      case "ob-name":
+      case 'ob-name':
         return <ObName go={go} state={user} set={set} />;
-      case "ob-identity":
+      case 'ob-identity':
         return <ObIdentity go={go} state={user} set={set} />;
-      case "ob-quiz":
+      case 'ob-quiz':
         return <ObQuiz go={go} state={user} set={set} />;
-      case "ob-lifestyle":
+      case 'ob-lifestyle':
         return <ObLifestyle go={go} state={user} set={set} />;
-      case "ob-photo":
+      case 'ob-photo':
         return <ObPhoto go={go} set={set} />;
-      case "ob-avail":
+      case 'ob-avail':
         return <ObAvail go={go} state={user} set={set} />;
-      case "home":
+      case 'home':
         return <Home go={go} state={user} />;
-      case "matches":
+      case 'matches':
         return <Matches go={go} />;
-      case "notes":
+      case 'notes':
         return <Notes go={go} />;
-      case "profile":
+      case 'profile':
         return <Profile go={go} state={user} />;
-      case "checkin":
+      case 'checkin':
         return <CheckIn go={go} />;
-      case "post-date":
+      case 'post-date':
         return <PostDate go={go} />;
-      case "lockout":
+      case 'lockout':
         return <Lockout go={go} />;
-      case "deep-quiz":
+      case 'deep-quiz':
         return <DeepQuiz go={go} />;
-      case "copy-editor":
+      case 'copy-editor':
         return <CopyEditor go={go} />;
       default:
         return <Splash go={go} />;
@@ -112,9 +99,7 @@ export default function App() {
 
   return (
     <>
-      <div
-        className="grain app-container"
-      >
+      <div className="grain app-container">
         <G />
         <div key={screen} className="app-screen">
           {render()}

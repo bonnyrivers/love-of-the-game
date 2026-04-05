@@ -50,7 +50,7 @@ export const QS = [
   },
 ];
 
-class ObQuiz extends React.Component {
+class ObQuiz extends React.Component<any> {
   constructor(props) {
     super(props);
     this.state = {
