@@ -24,7 +24,6 @@ import CopyEditor from './components/CopyEditor.tsx';
 import Auth from './components/Auth.tsx';
 import Nav from './components/Nav.tsx';
 import G from './styles.tsx';
-import HelloGraphQL from './graphql/HelloGraphQL.tsx';
 import { fetchCurrentProfile, logoutUser, getStoredAuthToken } from './services/profileApi.ts';
 
 const MAIN = ['home', 'matches', 'notes', 'profile'];
@@ -128,7 +127,6 @@ export default function App() {
         </div>
         {MAIN.includes(screen) && <Nav active={screen} go={go} />}
       </div>
-      <HelloGraphQL />
     </>
   );
 }
