@@ -103,7 +103,7 @@ export default function App() {
       case 'notes':
         return <Notes go={go} />;
       case 'profile':
-        return <Profile go={go} state={user} onLogout={handleLogout} />;
+        return <Profile go={go} state={user} onLogout={handleLogout} setProfile={set} />;
       case 'checkin':
         return <CheckIn go={go} />;
       case 'post-date':

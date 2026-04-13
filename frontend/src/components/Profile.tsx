@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from 'react';
-import { Screen, Mono } from './UI.tsx';
+import { Screen, Mono, Chip } from './UI.tsx';
 import copy from '../copy.ts';
 import './Profile.css';
 
@@ -11,7 +11,160 @@ class Profile extends React.Component<{
   go: (s: string) => void;
   state: Record<string, any>;
   onLogout: () => void;
+  setProfile: (d: Partial<Record<string, any>>) => void;
 }> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeEditor: null,
+    };
+  }
+
+  openEditor = (key) => {
+    this.setState({ activeEditor: key });
+  };
+
+  closeEditor = () => {
+    this.setState({ activeEditor: null });
+  };
+
+  toggleArrayValue = (field, value) => {
+    const current = this.props.state[field] || [];
+    const next = current.includes(value)
+      ? current.filter((item) => item !== value)
+      : [...current, value];
+    this.props.setProfile({ [field]: next });
+  };
+
+  setValue = (field, value) => {
+    this.props.setProfile({ [field]: value });
+  };
+
+  renderEditor = (editorKey) => {
+    const { activeEditor } = this.state;
+    const { state, go } = this.props;
+    if (activeEditor !== editorKey) return null;
+
+    if (editorKey === 'seeking') {
+      const options = copy.components.onboarding.obIdentity.seeking;
+      const selected = state.seeking || [];
+      return (
+        <div className="fu d3 profile-choice-panel">
+          <Mono style={{ display: 'block', marginBottom: 10 }}>
+            {copy.components.profile.details.lookingFor}
+          </Mono>
+          <div className="profile-choice-grid">
+            {options.map((option) => (
+              <Chip
+                key={option}
+                label={option}
+                active={selected.includes(option)}
+                onClick={() => this.toggleArrayValue('seeking', option)}
+              />
+            ))}
+          </div>
+          <button onClick={this.closeEditor} className="profile-choice-close">
+            Done
+          </button>
+        </div>
+      );
+    }
+
+    if (editorKey === 'profession') {
+      const options = copy.components.onboarding.obLifestyle.profession.options;
+      return (
+        <div className="fu d3 profile-choice-panel">
+          <Mono style={{ display: 'block', marginBottom: 10 }}>
+            {copy.components.profile.details.profession}
+          </Mono>
+          <div className="profile-choice-grid">
+            {options.map((option) => (
+              <Chip
+                key={option}
+                label={option}
+                active={state.profession === option}
+                onClick={() => this.setValue('profession', option)}
+              />
+            ))}
+          </div>
+          <button onClick={this.closeEditor} className="profile-choice-close">
+            Done
+          </button>
+        </div>
+      );
+    }
+
+    if (editorKey === 'bucket') {
+      const options = copy.components.onboarding.obLifestyle.bucketList.items;
+      const selected = state.bucket || [];
+      return (
+        <div className="fu d3 profile-choice-panel">
+          <Mono style={{ display: 'block', marginBottom: 10 }}>
+            {copy.components.profile.details.dateBucketList}
+          </Mono>
+          <div className="profile-choice-grid">
+            {options.map((option) => (
+              <Chip
+                key={option}
+                label={option}
+                active={selected.includes(option)}
+                onClick={() => this.toggleArrayValue('bucket', option)}
+              />
+            ))}
+          </div>
+          <button onClick={this.closeEditor} className="profile-choice-close">
+            Done
+          </button>
+        </div>
+      );
+    }
+
+    if (editorKey === 'loveGive') {
+      const options = copy.components.onboarding.obQuiz.q5.options;
+      return (
+        <div className="fu d3 profile-choice-panel">
+          <Mono style={{ display: 'block', marginBottom: 10 }}>
+            {copy.components.profile.details.loveLanguage}
+          </Mono>
+          <div className="profile-choice-grid">
+            {options.map((option) => (
+              <Chip
+                key={option}
+                label={option}
+                active={state.loveGive === option}
+                onClick={() => this.setValue('loveGive', option)}
+              />
+            ))}
+          </div>
+          <button onClick={this.closeEditor} className="profile-choice-close">
+            Done
+          </button>
+        </div>
+      );
+    }
+
+    if (editorKey === 'quickAnswers') {
+      return (
+        <div className="fu d3 profile-choice-panel">
+          <Mono style={{ display: 'block', marginBottom: 10 }}>
+            {copy.components.profile.details.quickProfile}
+          </Mono>
+          <p className="profile-choice-hint">Edit your quick profile responses in the quiz flow.</p>
+          <div className="profile-choice-actions">
+            <button onClick={() => go('ob-quiz')} className="profile-choice-close">
+              Open Quiz Editor
+            </button>
+            <button onClick={this.closeEditor} className="profile-choice-close">
+              Close
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   render() {
     const { go, state, onLogout } = this.props;
     return (
@@ -53,14 +206,17 @@ class Profile extends React.Component<{
         </div>
         {[
           {
+            key: 'seeking',
             label: copy.components.profile.details.lookingFor,
             val: state.seeking?.join(', ') || copy.shared.genericLabels.dash,
           },
           {
+            key: 'profession',
             label: copy.components.profile.details.profession,
             val: state.profession || copy.components.profile.details.professionNotSet,
           },
           {
+            key: 'bucket',
             label: copy.components.profile.details.dateBucketList,
             val: state.bucket?.length
               ? copy.components.profile.details.dateBucketSelected.replace(
@@ -70,23 +226,30 @@ class Profile extends React.Component<{
               : copy.components.profile.details.dateBucketNotSet,
           },
           {
+            key: 'loveGive',
             label: copy.components.profile.details.loveLanguage,
             val: state.loveGive
               ? copy.components.profile.details.loveLanguageGives.replace('{value}', state.loveGive)
               : copy.components.profile.details.loveLanguageNotAnswered,
           },
           {
+            key: 'quickAnswers',
             label: copy.components.profile.details.quickProfile,
             val: `${state.quickAnswers ? Object.keys(state.quickAnswers).length : 0} of 5 answered`,
           },
-        ].map(({ label, val }) => (
-          <div key={label} className="fu d3 profile-detail-item">
-            <div>
-              <Mono style={{ display: 'block', marginBottom: 4 }}>{label}</Mono>
-              <span className="profile-detail-value">{val}</span>
+        ].map(({ key, label, val }) => (
+          <React.Fragment key={label}>
+            <div className="fu d3 profile-detail-item">
+              <div>
+                <Mono style={{ display: 'block', marginBottom: 4 }}>{label}</Mono>
+                <span className="profile-detail-value">{val}</span>
+              </div>
+              <button onClick={() => this.openEditor(key)} className="profile-detail-edit-btn">
+                {copy.components.profile.details.edit}
+              </button>
             </div>
-            <Mono style={{ fontSize: 8 }}>{copy.components.profile.details.edit}</Mono>
-          </div>
+            {this.renderEditor(key)}
+          </React.Fragment>
         ))}
         <div className="fu d4 profile-deep-quiz-section">
           <Mono style={{ display: 'block', marginBottom: 5 }}>

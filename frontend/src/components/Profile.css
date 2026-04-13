@@ -8,6 +8,57 @@
   margin-bottom: 24px;
 }
 
+.profile-detail-edit-btn {
+  background: none;
+  border: none;
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--soft);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: underline;
+}
+
+.profile-choice-panel {
+  border: 1px solid var(--line2);
+  background: var(--bg2);
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.profile-choice-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.profile-choice-close {
+  margin-top: 14px;
+  border: 1px solid var(--line2);
+  background: var(--bg);
+  color: var(--soft);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 7px 11px;
+  cursor: pointer;
+}
+
+.profile-choice-hint {
+  margin: 0;
+  color: var(--mid);
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.profile-choice-actions {
+  display: flex;
+  gap: 10px;
+}
+
 .profile-name {
   font-family: var(--serif);
   font-size: 44px;
