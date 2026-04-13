@@ -21,28 +21,42 @@ import PostDate from './components/PostDate.tsx';
 import Lockout from './components/Lockout.tsx';
 import DeepQuiz from './components/DeepQuiz.tsx';
 import CopyEditor from './components/CopyEditor.tsx';
+import Auth from './components/Auth.tsx';
 import Nav from './components/Nav.tsx';
 import G from './styles.tsx';
 import HelloGraphQL from './graphql/HelloGraphQL.tsx';
-import { fetchProfileByEmail } from './services/profileApi.ts';
+import { fetchCurrentProfile, logoutUser, getStoredAuthToken } from './services/profileApi.ts';
 
 const MAIN = ['home', 'matches', 'notes', 'profile'];
 
 export default function App() {
   const [screen, setScreen] = useState<string>('splash');
   const [user, setUser] = useState<Record<string, any>>({});
+  const [bootingSession, setBootingSession] = useState(true);
   const go = (s: string) => setScreen(s);
   const set = (d: Partial<Record<string, any>>) => setUser((p) => ({ ...p, ...d }));
+  const clearUser = () => setUser({});
 
-  // Auto-load returning user's profile
+  const handleLogout = async () => {
+    await logoutUser();
+    clearUser();
+    setScreen('splash');
+  };
+
+  // Auto-load returning user's profile from auth token
   useEffect(() => {
-    const email: string | null = localStorage.getItem('pp_email');
-    if (!email) return;
-    fetchProfileByEmail(email).then((profile) => {
+    const token = getStoredAuthToken();
+    if (!token) {
+      setBootingSession(false);
+      return;
+    }
+
+    fetchCurrentProfile().then((profile) => {
       if (profile) {
-        setUser(profile);
+        setUser((current) => ({ ...current, ...profile, authToken: token }));
         setScreen('home');
       }
+      setBootingSession(false);
     });
   }, []);
 
@@ -59,9 +73,17 @@ export default function App() {
   }, []);
 
   const render = () => {
+    if (bootingSession) {
+      return null;
+    }
+
     switch (screen) {
       case 'splash':
         return <Splash go={go} />;
+      case 'auth-register':
+        return <Auth go={go} set={set} mode="register" />;
+      case 'auth-signin':
+        return <Auth go={go} set={set} mode="signin" />;
       case 'ob-name':
         return <ObName go={go} state={user} set={set} />;
       case 'ob-identity':
@@ -81,7 +103,7 @@ export default function App() {
       case 'notes':
         return <Notes go={go} />;
       case 'profile':
-        return <Profile go={go} state={user} />;
+        return <Profile go={go} state={user} onLogout={handleLogout} />;
       case 'checkin':
         return <CheckIn go={go} />;
       case 'post-date':

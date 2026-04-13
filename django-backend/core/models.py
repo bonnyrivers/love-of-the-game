@@ -1,5 +1,4 @@
-from uuid import uuid4
-
+from django.conf import settings
 from django.db import models
 
 
@@ -59,15 +58,7 @@ class Profile (models.Model):
     photo_verified = models.BooleanField(default=False)
     profile_photo_url = models.URLField(blank=True, default="")
     availability = models.JSONField(default=dict)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="profile")
 
     def __str__(self):
         return self.first_name
-    
-class User (models.Model):
-    uuid = models.UUIDField(default=uuid4, editable=False, unique=True)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=128)  # In a real application, use Django's built-in User model and password hashing
-    profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.email

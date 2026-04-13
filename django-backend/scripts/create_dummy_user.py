@@ -1,4 +1,6 @@
-from core.models import MatchRadius, Profile, User
+from django.contrib.auth import get_user_model
+
+from core.models import MatchRadius, Profile
 
 
 mr, _ = MatchRadius.objects.get_or_create(min_radius=1, max_radius=10, unit="MI")
@@ -29,15 +31,23 @@ profile, created_profile = Profile.objects.get_or_create(
 
 for key, value in profile_defaults.items():
     setattr(profile, key, value)
-profile.save()
-
+User = get_user_model()
 user, created_user = User.objects.get_or_create(
-    email="dummy@projectpilot.app",
-    defaults={"password": "dummy1234", "profile": profile},
+    username="dummy@projectpilot.app",
+    defaults={
+        "email": "dummy@projectpilot.app",
+        "first_name": profile.first_name,
+        "last_name": profile.last_name,
+    },
 )
-user.profile = profile
-user.password = "dummy1234"
+user.email = "dummy@projectpilot.app"
+user.first_name = profile.first_name
+user.last_name = profile.last_name
+user.set_password("dummy1234")
 user.save()
+
+profile.user = user
+profile.save()
 
 print(
     {

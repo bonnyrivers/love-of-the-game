@@ -5,7 +5,10 @@ import copy from '../copy.ts';
 import './Nav.css';
 
 // ─── NAV ──────────────────────────────────────────────────────────────────────
-class Nav extends React.Component<{ active: string; go: (s: string) => void }> {
+class Nav extends React.Component<{
+  active: string;
+  go: (s: string) => void;
+}> {
   render() {
     const { active, go } = this.props;
     return (

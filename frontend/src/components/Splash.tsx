@@ -23,10 +23,10 @@ class Splash extends React.Component<{ go: (s: string) => void }> {
           </div>
         </div>
         <div className="fu d5 splash-button-container">
-          <Btn onClick={() => this.props.go('ob-name')}>
+          <Btn onClick={() => this.props.go('auth-register')}>
             {copy.components.splash.buttons.getStarted}
           </Btn>
-          <Btn ghost onClick={() => this.props.go('home')}>
+          <Btn ghost onClick={() => this.props.go('auth-signin')}>
             {copy.components.splash.buttons.signIn}
           </Btn>
         </div>

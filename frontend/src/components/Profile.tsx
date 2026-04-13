@@ -7,9 +7,13 @@ import './Profile.css';
 // ══════════════════════════════════════════════════════════════════════════════
 // 13. PROFILE
 // ══════════════════════════════════════════════════════════════════════════════
-class Profile extends React.Component<{ go: (s: string) => void; state: Record<string, any> }> {
+class Profile extends React.Component<{
+  go: (s: string) => void;
+  state: Record<string, any>;
+  onLogout: () => void;
+}> {
   render() {
-    const { go, state } = this.props;
+    const { go, state, onLogout } = this.props;
     return (
       <Screen className="profile-screen">
         <div className="fu d1 profile-header">
@@ -101,6 +105,9 @@ class Profile extends React.Component<{ go: (s: string) => void; state: Record<s
           </button>
           <button onClick={() => go('checkin')} className="profile-footer-button">
             {copy.components.profile.preview.checkin}
+          </button>
+          <button onClick={onLogout} className="profile-footer-button profile-logout-button">
+            Log out
           </button>
         </div>
       </Screen>

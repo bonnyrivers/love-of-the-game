@@ -154,3 +154,7 @@
   text-decoration: underline;
   letter-spacing: 0.1em;
 }
+
+.profile-logout-button {
+  color: var(--soft);
+}

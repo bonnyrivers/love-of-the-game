@@ -1,8 +1,63 @@
 import graphene
+from django.contrib.auth import get_user_model
+from django.db.models import Q
 from graphene.types.generic import GenericScalar
+from rest_framework.authtoken.models import Token
 
-from core.models import MatchRadius, Profile, User
+from core.models import MatchRadius, Profile
 from core.services.copy_service import get_copy_data
+
+
+def get_user_by_email(email):
+    user_model = get_user_model()
+    normalized_email = email.strip().lower()
+    return (
+        user_model.objects.filter(Q(username=normalized_email) | Q(email__iexact=normalized_email))
+        .select_related("profile")
+        .order_by("id")
+        .first()
+    )
+
+
+def password_matches(user, raw_password):
+    if user.check_password(raw_password):
+        return True
+
+    if user.password == raw_password:
+        user.set_password(raw_password)
+        user.save(update_fields=["password"])
+        return True
+
+    return False
+
+
+def issue_auth_token(user):
+    token, _ = Token.objects.get_or_create(user=user)
+    return token
+
+
+def get_token_from_request(info):
+    request = getattr(info, "context", None)
+    if request is None:
+        return None
+
+    auth_header = request.META.get("HTTP_AUTHORIZATION", "")
+    if not auth_header.startswith("Bearer "):
+        return None
+
+    token_key = auth_header.split(" ", 1)[1].strip()
+    if not token_key:
+        return None
+
+    return Token.objects.filter(key=token_key).select_related("user__profile").first()
+
+
+def get_authenticated_profile(info):
+    token = get_token_from_request(info)
+    if not token:
+        return None
+
+    return getattr(token.user, "profile", None)
 
 
 class MatchRadiusType(graphene.ObjectType):
@@ -56,6 +111,7 @@ class Query(graphene.ObjectType):
     copy = GenericScalar()
     profile = graphene.Field(ProfileType, id=graphene.ID(required=True))
     profile_by_email = graphene.Field(ProfileType, email=graphene.String(required=True))
+    current_profile = graphene.Field(ProfileType)
 
     def resolve_copy(self, info):
         return get_copy_data()
@@ -64,8 +120,11 @@ class Query(graphene.ObjectType):
         return Profile.objects.filter(id=id).first()
 
     def resolve_profile_by_email(self, info, email):
-        user = User.objects.filter(email=email).select_related("profile").first()
+        user = get_user_by_email(email)
         return user.profile if user else None
+
+    def resolve_current_profile(self, info):
+        return get_authenticated_profile(info)
 
 
 class UpsertProfile(graphene.Mutation):
@@ -73,9 +132,12 @@ class UpsertProfile(graphene.Mutation):
         input = UpsertProfileInput(required=True)
 
     profile = graphene.Field(ProfileType)
+    auth_token = graphene.String()
 
     @staticmethod
     def mutate(root, info, input):
+        user_model = get_user_model()
+        normalized_email = input["email"].strip().lower()
         match_radius = None
         radius = input.get("radius")
         if radius is not None:
@@ -103,24 +165,72 @@ class UpsertProfile(graphene.Mutation):
             "availability": input.get("availability") or {},
         }
 
-        user = User.objects.filter(email=input["email"]).select_related("profile").first()
+        user = get_user_by_email(normalized_email)
         if user:
-            profile = user.profile
+            profile = getattr(user, "profile", None)
+            if input.get("password"):
+                user.set_password(input["password"])
+            user.email = normalized_email
+            user.username = normalized_email
+            user.first_name = input["first_name"]
+            user.last_name = input.get("last_name") or ""
+            user.save(update_fields=["email", "username", "first_name", "last_name", "password"] if input.get("password") else ["email", "username", "first_name", "last_name"])
+
+            if profile is None:
+                profile = Profile.objects.create(user=user, **profile_defaults)
+                return UpsertProfile(profile=profile)
+
             for key, value in profile_defaults.items():
                 setattr(profile, key, value)
             profile.save()
         else:
-            profile = Profile.objects.create(**profile_defaults)
-            user = User.objects.create(
-                email=input["email"],
-                password=input.get("password") or "change-me",
-                profile=profile,
+            user = user_model.objects.create(
+                username=normalized_email,
+                email=normalized_email,
+                first_name=input["first_name"],
+                last_name=input.get("last_name") or "",
             )
+            user.set_password(input.get("password") or "change-me")
+            user.save(update_fields=["password"])
+            profile = Profile.objects.create(user=user, **profile_defaults)
 
-        return UpsertProfile(profile=user.profile)
+        token = issue_auth_token(user)
+
+        return UpsertProfile(profile=profile, auth_token=token.key)
+
+
+class SignIn(graphene.Mutation):
+    class Arguments:
+        email = graphene.String(required=True)
+        password = graphene.String(required=True)
+
+    profile = graphene.Field(ProfileType)
+    auth_token = graphene.String()
+
+    @staticmethod
+    def mutate(root, info, email, password):
+        user = get_user_by_email(email)
+        if not user or not password_matches(user, password):
+            raise Exception("Invalid email or password.")
+
+        token = issue_auth_token(user)
+        return SignIn(profile=user.profile, auth_token=token.key)
+
+
+class Logout(graphene.Mutation):
+    ok = graphene.Boolean()
+
+    @staticmethod
+    def mutate(root, info):
+        token = get_token_from_request(info)
+        if token:
+            token.delete()
+        return Logout(ok=True)
 
 
 class Mutation(graphene.ObjectType):
     upsert_profile = UpsertProfile.Field()
+    sign_in = SignIn.Field()
+    logout = Logout.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
