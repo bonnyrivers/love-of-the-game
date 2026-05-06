@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useState } from 'react';
 import { Btn, Mono, Rule, Screen } from './UI.tsx';
-import { registerUser, signInUser } from '../services/profileApi.ts';
+import { registerUser, signInUser } from '../graphql/profileApi.ts';
 import './Auth.css';
 
 type AuthProps = {

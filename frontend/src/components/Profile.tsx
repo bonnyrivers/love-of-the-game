@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import { Screen, Mono, Chip } from './UI.tsx';
-import copy from '../copy.ts';
+import copy from '../graphql/copy.ts';
 import './Profile.css';
 
 // ══════════════════════════════════════════════════════════════════════════════

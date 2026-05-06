@@ -24,7 +24,7 @@ import CopyEditor from './components/CopyEditor.tsx';
 import Auth from './components/Auth.tsx';
 import Nav from './components/Nav.tsx';
 import G from './styles.tsx';
-import { fetchCurrentProfile, logoutUser, getStoredAuthToken } from './services/profileApi.ts';
+import { fetchCurrentProfile, logoutUser, getStoredAuthToken } from './graphql/profileApi.ts';
 
 const MAIN = ['home', 'matches', 'notes', 'profile'];
 

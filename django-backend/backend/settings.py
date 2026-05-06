@@ -98,10 +98,7 @@ DATABASES = {
 
 database_url = config('DATABASE_URL', default='')
 if database_url:
-    parse_kwargs = {'conn_max_age': 600}
-    if not database_url.startswith('sqlite'):
-        parse_kwargs['ssl_require'] = True
-    DATABASES['default'] = dj_database_url.parse(database_url, **parse_kwargs)
+    DATABASES['default'] = dj_database_url.parse(database_url, conn_max_age=600)
 
 
 # Password validation

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { GRAPHQL_URL } from "./graphqlUrl.ts";
+import { GRAPHQL_URL } from './graphqlUrl.ts';
 
 const copy = {};
 
@@ -9,9 +9,9 @@ export async function loadCopy() {
   if (loaded) return copy;
 
   const response = await fetch(GRAPHQL_URL, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       query: `query CopyPayload { copy }`,
@@ -25,8 +25,8 @@ export async function loadCopy() {
   const payload = await response.json();
   const data = payload?.data?.copy;
 
-  if (!data || typeof data !== "object") {
-    throw new Error("Copy payload missing from GraphQL response");
+  if (!data || typeof data !== 'object') {
+    throw new Error('Copy payload missing from GraphQL response');
   }
 
   Object.assign(copy, data);

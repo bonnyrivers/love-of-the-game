@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useState } from 'react';
 import { Screen, Mono, Rule, Btn } from '../../../src/components/UI.tsx';
-import copy from '../copy.ts';
+import copy from '../graphql/copy.ts';
 import './FieldNotes.css';
 
 // ══════════════════════════════════════════════════════════════════════════════

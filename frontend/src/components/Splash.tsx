@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import { Screen, Mono, Btn } from './UI.tsx';
-import copy from '../copy.ts';
+import copy from '../graphql/copy.ts';
 import './Splash.css';
 
 class Splash extends React.Component<{ go: (s: string) => void }> {

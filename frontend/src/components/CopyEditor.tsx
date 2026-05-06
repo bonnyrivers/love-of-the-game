@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState } from 'react';
-import { Screen, Mono, Btn } from "./UI.tsx";
-import copy from '../copy.ts';
+import { Screen, Mono, Btn } from './UI.tsx';
+import copy from '../graphql/copy.ts';
 import './CopyEditor.css';
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -29,20 +29,16 @@ const CopyEditor = ({ go }) => {
       return (
         <div key={pathString} className="copy-editor-leaf">
           <Mono className="copy-editor-path">{pathString}</Mono>
-          <textarea
-            defaultValue={value}
-            className="copy-editor-textarea base"
-          />
+          <textarea defaultValue={value} className="copy-editor-textarea base" />
         </div>
       );
     } else if (Array.isArray(value)) {
       return (
         <div key={pathString} className="copy-editor-node">
-          <button
-            onClick={() => toggleSection(pathString)}
-            className="copy-editor-toggle"
-          >
-            <Mono className={`copy-editor-toggle-label${expandedSections.has(pathString) ? ' expanded' : ''}`}>
+          <button onClick={() => toggleSection(pathString)} className="copy-editor-toggle">
+            <Mono
+              className={`copy-editor-toggle-label${expandedSections.has(pathString) ? ' expanded' : ''}`}
+            >
               {expandedSections.has(pathString) ? '▼' : '▶'} {key} [{value.length}]
             </Mono>
           </button>
@@ -53,10 +49,7 @@ const CopyEditor = ({ go }) => {
                   <Mono className="copy-editor-array-path">
                     {pathString}[{index}]
                   </Mono>
-                  <textarea
-                    defaultValue={item}
-                    className="copy-editor-textarea array"
-                  />
+                  <textarea defaultValue={item} className="copy-editor-textarea array" />
                 </div>
               ))}
             </div>
@@ -64,21 +57,21 @@ const CopyEditor = ({ go }) => {
         </div>
       );
     } else if (typeof value === 'object' && value !== null) {
-      const filteredEntries = Object.entries(value).filter(([k, v]) =>
-        searchTerm === '' ||
-        k.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (typeof v === 'string' && v.toLowerCase().includes(searchTerm.toLowerCase()))
+      const filteredEntries = Object.entries(value).filter(
+        ([k, v]) =>
+          searchTerm === '' ||
+          k.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (typeof v === 'string' && v.toLowerCase().includes(searchTerm.toLowerCase()))
       );
 
       if (filteredEntries.length === 0) return null;
 
       return (
         <div key={pathString} className="copy-editor-node">
-          <button
-            onClick={() => toggleSection(pathString)}
-            className="copy-editor-toggle"
-          >
-            <Mono className={`copy-editor-toggle-label${expandedSections.has(pathString) ? ' expanded' : ''}`}>
+          <button onClick={() => toggleSection(pathString)} className="copy-editor-toggle">
+            <Mono
+              className={`copy-editor-toggle-label${expandedSections.has(pathString) ? ' expanded' : ''}`}
+            >
               {expandedSections.has(pathString) ? '▼' : '▶'} {key}
             </Mono>
           </button>
@@ -99,7 +92,7 @@ const CopyEditor = ({ go }) => {
 
     // Collect all changes
     const changes = {};
-    textAreas.forEach(textarea => {
+    textAreas.forEach((textarea) => {
       const pathLabel = textarea.previousElementSibling?.textContent;
       if (pathLabel) {
         const pathParts = pathLabel.split('.');
@@ -148,11 +141,19 @@ const CopyEditor = ({ go }) => {
         return `"${value.replace(/"/g, '\\"').replace(/\n/g, '\\n')}"`;
       } else if (Array.isArray(value)) {
         if (value.length === 0) return '[]';
-        return '[\n' + value.map(item => `${spaces}  ${formatValue(item, indent)}`).join(',\n') + `\n${spaces}]`;
+        return (
+          '[\n' +
+          value.map((item) => `${spaces}  ${formatValue(item, indent)}`).join(',\n') +
+          `\n${spaces}]`
+        );
       } else if (typeof value === 'object' && value !== null) {
         const entries = Object.entries(value);
         if (entries.length === 0) return '{}';
-        return '{\n' + entries.map(([k, v]) => `${spaces}  "${k}": ${formatValue(v, indent + 1)}`).join(',\n') + `\n${spaces}}`;
+        return (
+          '{\n' +
+          entries.map(([k, v]) => `${spaces}  "${k}": ${formatValue(v, indent + 1)}`).join(',\n') +
+          `\n${spaces}}`
+        );
       }
       return String(value);
     };
@@ -165,10 +166,12 @@ const CopyEditor = ({ go }) => {
       if ('showSaveFilePicker' in window) {
         const handle = await window.showSaveFilePicker({
           suggestedName: 'copy.ts',
-          types: [{
-            description: 'JavaScript files',
-            accept: {'text/javascript': ['.ts']}
-          }]
+          types: [
+            {
+              description: 'JavaScript files',
+              accept: { 'text/javascript': ['.ts'] },
+            },
+          ],
         });
         const writable = await handle.createWritable();
         await writable.write(output);
@@ -182,10 +185,14 @@ const CopyEditor = ({ go }) => {
       // Fallback to clipboard
       if (navigator.clipboard) {
         await navigator.clipboard.writeText(output);
-        alert('File System Access API not supported. Updated copy copied to clipboard! Paste it into copy.ts');
+        alert(
+          'File System Access API not supported. Updated copy copied to clipboard! Paste it into copy.ts'
+        );
       } else {
         console.log(output);
-        alert('File System Access API not supported. Updated copy logged to console. Copy and paste it into copy.ts');
+        alert(
+          'File System Access API not supported. Updated copy logged to console. Copy and paste it into copy.ts'
+        );
       }
     }
   };
@@ -194,11 +201,10 @@ const CopyEditor = ({ go }) => {
     <Screen>
       <div className="fu d1 copy-editor-header">
         <Mono>Copy Editor</Mono>
-        <h2 className="onboarding-h2">
-          Edit All Copy Strings
-        </h2>
+        <h2 className="onboarding-h2">Edit All Copy Strings</h2>
         <p className="copy-editor-description">
-          Update text strings for localization. Changes will be saved directly to copy.js when supported, or copied to clipboard for manual updates.
+          Update text strings for localization. Changes will be saved directly to copy.js when
+          supported, or copied to clipboard for manual updates.
         </p>
       </div>
 
@@ -217,8 +223,12 @@ const CopyEditor = ({ go }) => {
       </div>
 
       <div className="fu d4 copy-editor-actions">
-        <Btn onClick={exportCopy} className="copy-editor-action-btn">Save Changes</Btn>
-        <Btn ghost onClick={() => go('home')} className="copy-editor-action-btn">Back to App</Btn>
+        <Btn onClick={exportCopy} className="copy-editor-action-btn">
+          Save Changes
+        </Btn>
+        <Btn ghost onClick={() => go('home')} className="copy-editor-action-btn">
+          Back to App
+        </Btn>
       </div>
     </Screen>
   );

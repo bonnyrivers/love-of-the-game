@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import { Mono } from './UI.tsx';
-import copy from '../copy.ts';
+import copy from '../graphql/copy.ts';
 import './Nav.css';
 
 // ─── NAV ──────────────────────────────────────────────────────────────────────

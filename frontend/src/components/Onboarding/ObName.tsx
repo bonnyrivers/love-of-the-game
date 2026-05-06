@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
-import { Mono, Screen, Btn } from "../UI.tsx";
-import copy from '../../copy.ts';
+import { Mono, Screen, Btn } from '../UI.tsx';
+import copy from '../../graphql/copy.ts';
 import './ObName.css';
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -11,8 +11,8 @@ class ObName extends React.Component<any> {
   constructor(props) {
     super(props);
     this.state = {
-      name: props.state.name || "",
-      age: props.state.age || ""
+      name: props.state.name || '',
+      age: props.state.age || '',
     };
   }
 
@@ -24,7 +24,7 @@ class ObName extends React.Component<any> {
     const { name, age } = this.state;
     if (name && age) {
       this.props.set({ name, age });
-      this.props.go("ob-identity");
+      this.props.go('ob-identity');
     }
   };
 
@@ -36,12 +36,14 @@ class ObName extends React.Component<any> {
         <div className="fu d1 ob-name-header">
           <Mono>{copy.components.onboarding.obName.step}</Mono>
           <h2 className="onboarding-h2">{copy.components.onboarding.obName.title}</h2>
-          <p className="onboarding-p-subtitle-large">{copy.components.onboarding.obName.subtitle}</p>
+          <p className="onboarding-p-subtitle-large">
+            {copy.components.onboarding.obName.subtitle}
+          </p>
         </div>
         <div className="fu d3 onboarding-main-container gap-32">
           {[
-            [copy.components.onboarding.obName.firstNameLabel, name, "name", "text"],
-            [copy.components.onboarding.obName.ageLabel, age, "age", "number"]
+            [copy.components.onboarding.obName.firstNameLabel, name, 'name', 'text'],
+            [copy.components.onboarding.obName.ageLabel, age, 'age', 'number'],
           ].map(([l, v, f, t]) => (
             <div key={l}>
               <Mono>{l}</Mono>
@@ -55,7 +57,9 @@ class ObName extends React.Component<any> {
           ))}
         </div>
         <div className="fu d5">
-          <Btn onClick={this.handleContinue} disabled={!name || !age}>{copy.components.onboarding.obName.continue}</Btn>
+          <Btn onClick={this.handleContinue} disabled={!name || !age}>
+            {copy.components.onboarding.obName.continue}
+          </Btn>
         </div>
       </Screen>
     );
